@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Guns;
 using UnityEngine;
+
+
 
 
 public class EnemyController : MonoBehaviour, IEnemy, IDamageable
 {
     public EnemyData enemyData;
     private HealthController healthController;
+
+    public GunModel gunModel;
+
+    public GunModel GetGun() => gunModel;
+
 
     // Start is called before the first frame update
     void Start()

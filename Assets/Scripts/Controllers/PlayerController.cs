@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 //TODO: Mergear al colo
     private void TakeEnemy(EnemyController enemy)
     {
-        print(enemy);
+        SetGun(enemy.GetGun());
     }
 
     public void SetGun(GunModel gun) => currGun = gun;
