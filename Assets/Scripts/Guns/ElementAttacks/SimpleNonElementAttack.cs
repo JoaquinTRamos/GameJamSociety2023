@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Guns.ElementAttacks
 {
-    [CreateAssetMenu(fileName = "WaterElementAttack", menuName = "Main/ElementAttacks/WaterElementAttack", order = 0)]
-    public class WaterElementAttack : ElementAttack
+    [CreateAssetMenu(fileName = "SimpleNonElementAttack", menuName = "Main/ElementAttacks/SimpleNonElementAttack", order = 0)]
+    public class SimpleNonElementAttack : ElementAttack
     {
         public override void InitAttack(BulletModel p_model)
         {

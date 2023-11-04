@@ -9,12 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b4f6e2851d64ca0a897bbc3a99b4bad, type: 3}
-  m_Name: FireGunData
+  m_Script: {fileID: 11500000, guid: 049ae1a464dd4c4cae82bd9e26e11853, type: 3}
+  m_Name: SimpleNonElementAttack
   m_EditorClassIdentifier: 
-  bulletModel: {fileID: 2626899881137438951, guid: 0f8ccbaf722c50648ba112753f329dcc, type: 3}
-  damage: 0.2
-  speed: 0.5
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 2048
