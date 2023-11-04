@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
         mapBounds.center = map.position;
         mapBounds.extents = map.localScale / 2;
         print(mapBounds.size);
-
     }
 
     // Update is called once per frame
