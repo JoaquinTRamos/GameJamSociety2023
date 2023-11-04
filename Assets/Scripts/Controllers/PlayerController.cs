@@ -33,19 +33,24 @@ public class PlayerController : MonoBehaviour
 
     private void TakeEnemy(EnemyController enemy)
     {
-        SetGun(enemy.GetGun());
+        if (currGun != null)
+            Destroy(currGun.gameObject);
+        currGun = Instantiate(enemy.GetGun(), transform);
         Destroy(enemy.gameObject);
-        currGun.transform.position = transform.position;
-        currGun.transform.SetParent(transform);
+        //currGun.transform.SetParent(transform);
+        //currGun.transform.position = new Vector2();
 
         print(currGun);
     }
 
-    public void SetGun(GunModel gun) => currGun = gun;
+    //public void SetGun(GunModel gun) => currGun = gun;
 
     private void Shoot()
     {
-        currGun.Shoot(Vector2.right);
+        //Shoot in the direction of the mouse
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = (mousePos - transform.position).normalized;
+        currGun.Shoot(dir);
     }
 
     private void Throw()
@@ -117,7 +122,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             print("An attempt to shoot has been made");
-            if(currGun != null)
+            if (currGun != null)
                 Shoot();
         }
 

@@ -12,7 +12,7 @@ namespace Guns
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            /* if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 data = TEST_DATAS[0];
             }
@@ -33,7 +33,7 @@ namespace Guns
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Shoot(Vector2.right);
-            }
+            } */
         }
 
         public void Shoot(Vector2 p_dir)
