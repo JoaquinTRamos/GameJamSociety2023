@@ -30,11 +30,14 @@ namespace Guns.Bullets
             m_stats.Damage = p_damage;
             m_stats.Speed = p_speed;
             m_stats.TargetsLayerMask = p_targetMask;
+
+            
             
             myElementAttack.InitAttack(this);
             m_initialized = true;
             Destroy(gameObject, lifeTime);
         }
+        
         
         private void Update()
         {

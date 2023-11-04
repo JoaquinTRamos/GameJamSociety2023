@@ -285,6 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMod: 5
   map: {fileID: 848259210}
+  detectionRadius: 3
 --- !u!212 &1394300462
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -609,15 +610,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1520407991168963934, guid: 5a2c14e2790e01f47aabba64f98ae493, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Carlos
       objectReference: {fileID: 0}
     - target: {fileID: 2049351781155965752, guid: 5a2c14e2790e01f47aabba64f98ae493, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 5.33
       objectReference: {fileID: 0}
     - target: {fileID: 2049351781155965752, guid: 5a2c14e2790e01f47aabba64f98ae493, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 3.38
       objectReference: {fileID: 0}
     - target: {fileID: 2049351781155965752, guid: 5a2c14e2790e01f47aabba64f98ae493, type: 3}
       propertyPath: m_LocalPosition.z

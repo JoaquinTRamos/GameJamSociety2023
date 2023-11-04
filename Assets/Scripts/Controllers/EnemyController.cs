@@ -19,14 +19,16 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     // Start is called before the first frame update
     void Start()
     {
-        healthController = GetComponent<HealthController>();
-        healthController.Initialize(enemyData.health);
+        /* healthController = GetComponent<HealthController>();
+        healthController.Initialize(enemyData.health); */
+        GetGunModel();
+        print(gunModel);
 
         ChangeColorOnElement();
     }
     public void Highlight()
     {
-        print("Enemy Highlighted");
+        //print("Enemy Highlighted");
         //gameObject.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 1);
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         StartCoroutine(RemoveHighlightAfterSeconds(0.2f)); // highlight will be removed after 3 seconds
@@ -64,6 +66,27 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
             gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         else
             print("No element assigned!");
+    }
+
+    void GetGunModel(){
+        print(enemyData.elementType);
+        switch (enemyData.elementType){
+            case Element.Fire:
+                gunModel = Instantiate(Resources.Load<GunModel>("Prefabs/Guns/FireGun"));
+                break;
+            case Element.Water:
+                gunModel = Instantiate(Resources.Load<GunModel>("Prefabs/Guns/WaterGun"));
+                break;
+            case Element.Wind:
+                gunModel = Instantiate(Resources.Load<GunModel>("Prefabs/Guns/WindGun"));
+                break;
+            case Element.Lightning:
+                gunModel = Instantiate(Resources.Load<GunModel>("Prefabs/Guns/LightningGun"));
+                break;
+            case Element.Earth:
+                gunModel = Instantiate(Resources.Load<GunModel>("Prefabs/Guns/EarthGun"));
+                break;
+        }
     }
 
     public void Damage(int damage, Element element, System.Numerics.Vector3 direction)

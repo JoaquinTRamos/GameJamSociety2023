@@ -30,10 +30,15 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(CheckDistances());
 
     }
-//TODO: Mergear al colo
+
     private void TakeEnemy(EnemyController enemy)
     {
         SetGun(enemy.GetGun());
+        currGun.GetComponent<Rigidbody2D>().isKinematic = true;
+        currGun.transform.position = transform.position;
+        currGun.transform.SetParent(transform);
+
+        print(currGun);
     }
 
     public void SetGun(GunModel gun) => currGun = gun;
@@ -100,9 +105,10 @@ public class PlayerController : MonoBehaviour
     {
         horMove = Input.GetAxisRaw("Horizontal");
         verMove = Input.GetAxisRaw("Vertical");
-
+        //print(horMove + " " + verMove);
         if (Input.GetKeyDown(KeyCode.F) && closestEnemy != null)
         {
+            print(closestEnemy.name);
             TakeEnemy(closestEnemy);
         }
         if (inBoundingBox())
@@ -110,7 +116,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            print("An attempt to attack has been made");
+            print("An attempt to shoot has been made");
+            if(currGun != null)
+                Shoot();
         }
 
         if (Input.GetMouseButtonDown(1))
