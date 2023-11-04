@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class EnemyController : MonoBehaviour //Tambien crear aca un interface para que el EnemyManager pueda llamar correctamente todos los metodos correctos
+public class EnemyController : MonoBehaviour, IEnemy, IDamageable
 {
     public EnemyData enemyData;
+    private HealthController healthController;
 
     // Start is called before the first frame update
     void Start()
     {
+        healthController = GetComponent<HealthController>();
+        healthController.Initialize(enemyData.health);
+
         ChangeColorOnElement();
     }
     public void Highlight()
@@ -28,13 +32,13 @@ public class EnemyController : MonoBehaviour //Tambien crear aca un interface pa
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        Vector3 playerPos = GameManager.instance.playerObject.transform.position;
+        Vector3 playerPosition = GameManager.instance.playerObject.transform.position;
+        Vector3 directionToPlayer = (playerPosition - transform.position).normalized;
+        Vector3 movement = Time.deltaTime * enemyData.speedMod * directionToPlayer;
 
-        Vector3 directionVector = playerPos - transform.position;
-
-        transform.Translate(directionVector.normalized * enemyData.speedMod * Time.deltaTime);
+        transform.Translate(movement);
     }
 
     
@@ -52,5 +56,24 @@ public class EnemyController : MonoBehaviour //Tambien crear aca un interface pa
             gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         else
             print("No element assigned!");
+    }
+
+    public void Damage(int damage, Element element, System.Numerics.Vector3 direction)
+    {
+        healthController.TakeDamage(damage);
+
+        switch (element)
+        {
+            case Element.Fire:
+                return;
+            case Element.Water:
+                return;
+            case Element.Wind:
+                return;
+            case Element.Lightning:
+                return;
+            case Element.Earth:
+                return;
+        }
     }
 }
