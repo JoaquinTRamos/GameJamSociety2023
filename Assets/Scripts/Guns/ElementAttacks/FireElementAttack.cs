@@ -23,7 +23,7 @@ namespace Guns.ElementAttacks
             p_model.Move(m_randomVector3S[p_model], p_model.GetStats().Speed);
         }
 
-        public override void OnImpact(BulletModel p_model, Collision p_collision)
+        public override void OnImpact(BulletModel p_model, Collider2D p_collision)
         {
             //if(p_collision.gameObject.GetComponent<IDamageable>())
             

@@ -7,6 +7,6 @@ namespace Guns.ElementAttacks
     {
         public abstract void InitAttack(BulletModel p_model);
         public abstract void ExecuteAttack(BulletModel p_model);
-        public abstract void OnImpact(BulletModel p_model, Collision p_collision);
+        public abstract void OnImpact(BulletModel p_model, Collider2D p_collision);
     }
 }
