@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
         mapBounds.center = map.position;
         mapBounds.extents = map.localScale / 2;
         print(mapBounds.size);
-        
+
     }
 
     // Update is called once per frame
@@ -27,15 +27,15 @@ public class PlayerController : MonoBehaviour
     {
         horMove = Input.GetAxisRaw("Horizontal");
         verMove = Input.GetAxisRaw("Vertical");
-        
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 3f);
-            int i = 0;
             Debug.Log(hitColliders.Length);
+
             if (hitColliders.Length > 0)
             {
-                for(i = 0; i < hitColliders.Length; i++)
+                for (int i = 0; i < hitColliders.Length; i++)
                 {
                     Debug.Log(hitColliders[i].gameObject);
                     if (hitColliders[i].gameObject.CompareTag("Enemy"))
