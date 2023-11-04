@@ -10,15 +10,20 @@ public class GameManager : MonoBehaviour
 
     public List<MonoBehaviour> managers = new List<MonoBehaviour>(); // Fijarse en poner un interface de managers para el futuro.
 
-    void Start()
+    void Awake()
     {
         // Chequea que sea la unica instancia del GameManager.
-        if (this != instance)
+        if (instance != null)
         {
             Destroy(instance);
-            instance = this;
-            DontDestroyOnLoad(this);
         }
+
+        instance = this;
+        DontDestroyOnLoad(this);
+    }
+
+    void Start()
+    {
 
     }
 
