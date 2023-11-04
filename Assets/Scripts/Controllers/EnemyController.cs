@@ -12,6 +12,18 @@ public class EnemyController : MonoBehaviour //Tambien crear aca un interface pa
     {
         ChangeColorOnElement();
     }
+    public void Highlight()
+    {
+        print("Enemy Highlighted");
+        gameObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.blue);
+        StartCoroutine(RemoveHighlightAfterSeconds(3)); // highlight will be removed after 3 seconds
+    }
+
+    IEnumerator RemoveHighlightAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        gameObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
+    }
 
     // Update is called once per frame
     void Update()
