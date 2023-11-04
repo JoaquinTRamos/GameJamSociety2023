@@ -21,7 +21,6 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     {
         /* healthController = GetComponent<HealthController>();
         healthController.Initialize(enemyData.health); */
-        GetGunModel();
         print(gunModel);
 
         ChangeColorOnElement();
@@ -68,26 +67,6 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
             print("No element assigned!");
     }
 
-    void GetGunModel(){
-        print(enemyData.elementType);
-        switch (enemyData.elementType){
-            case Element.Fire:
-                gunModel = Instantiate(Resources.Load<GunModel>("Prefabs/Guns/FireGun"));
-                break;
-            case Element.Water:
-                gunModel = Instantiate(Resources.Load<GunModel>("Prefabs/Guns/WaterGun"));
-                break;
-            case Element.Wind:
-                gunModel = Instantiate(Resources.Load<GunModel>("Prefabs/Guns/WindGun"));
-                break;
-            case Element.Lightning:
-                gunModel = Instantiate(Resources.Load<GunModel>("Prefabs/Guns/LightningGun"));
-                break;
-            case Element.Earth:
-                gunModel = Instantiate(Resources.Load<GunModel>("Prefabs/Guns/EarthGun"));
-                break;
-        }
-    }
 
     public void Damage(int damage, Element element, System.Numerics.Vector3 direction)
     {

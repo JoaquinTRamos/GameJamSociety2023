@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     private void TakeEnemy(EnemyController enemy)
     {
         SetGun(enemy.GetGun());
-        currGun.GetComponent<Rigidbody2D>().isKinematic = true;
+        Destroy(enemy.gameObject);
         currGun.transform.position = transform.position;
         currGun.transform.SetParent(transform);
 
