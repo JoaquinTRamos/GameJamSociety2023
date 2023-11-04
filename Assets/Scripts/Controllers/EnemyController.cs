@@ -15,14 +15,16 @@ public class EnemyController : MonoBehaviour //Tambien crear aca un interface pa
     public void Highlight()
     {
         print("Enemy Highlighted");
-        gameObject.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 1);
-        StartCoroutine(RemoveHighlightAfterSeconds(3)); // highlight will be removed after 3 seconds
+        //gameObject.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 1);
+        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        StartCoroutine(RemoveHighlightAfterSeconds(0.2f)); // highlight will be removed after 3 seconds
     }
 
     IEnumerator RemoveHighlightAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        gameObject.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 0);
+        //gameObject.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 0);
+        gameObject.GetComponent<SpriteRenderer>().color = Color.green;
     }
 
     // Update is called once per frame
@@ -35,6 +37,7 @@ public class EnemyController : MonoBehaviour //Tambien crear aca un interface pa
         transform.Translate(directionVector.normalized * enemyData.speedMod * Time.deltaTime);
     }
 
+    
     void ChangeColorOnElement()
     {
         if (enemyData.elementType == Element.Fire)
