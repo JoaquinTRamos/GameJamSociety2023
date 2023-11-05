@@ -55,6 +55,23 @@ public class Wave
             wind -= 1;
     }
 
+    public void AssignElementQuantity(Element element, int i)
+    {
+        if (element == Element.Fire)
+            fire = i;
+
+        if (element == Element.Water)
+            water = i;
+
+        if (element == Element.Earth)
+            earth = i;
+
+        if (element == Element.Lightning)
+            lightning = i;
+
+        if (element == Element.Wind)
+            wind = i;
+    }
 }
 
 

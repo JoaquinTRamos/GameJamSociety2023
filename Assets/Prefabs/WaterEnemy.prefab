@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb2a357f7cfbbf4183c7a33451aed77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: b632a5afb150aa444af042eda17ad158, type: 2}
+  enemyData: {fileID: 11400000, guid: 1a1e5cfd69ced144cac9b569306a661d, type: 2}
   id: 0
   fireParticles: {fileID: 6530800246334125821, guid: 8cdcf6095f8545344aed213f17d8be3b, type: 3}
   waterParticles: {fileID: 6530800246334125821, guid: 1696127786ed9284892fe974046b1812, type: 3}

@@ -40,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
 
             spawnLooker.eulerAngles = new Vector3(0, 0, angle);
 
-            cooldown = temp;
+            cooldown = temp; // Capaz joder aca para cuanto mas rondas mas rapido spawnean bichos
 
             Vector3 spawnPoint = player.position + spawnLooker.up * dist;
 
