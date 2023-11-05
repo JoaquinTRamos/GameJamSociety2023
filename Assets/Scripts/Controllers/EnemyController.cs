@@ -7,14 +7,20 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour, IEnemy, IDamageable
 {
     public EnemyData enemyData;
+
+    Transform highlighteablePart;
+
     private HealthController healthController;
-    public int id;    public ParticleSystem fireParticles;
+    public int id;
+    public ParticleSystem fireParticles;
     public ParticleSystem waterParticles;
     public ParticleSystem windParticles;
     public ParticleSystem earthParticles;
     public ParticleSystem lightningParticles;
 
     public GunModel gunModel;
+
+    GameObject skinInstance;
 
     public GunModel GetGun() => gunModel;
 
@@ -28,24 +34,45 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
         healthController.OnDie += OnDie;
         // print(gunModel);
 
-        GameObject skin =enemyData.skin;
-        Instantiate(skin,transform);
-        skin.tag="Enemy";
+        GameObject skin = enemyData.skin;
+        skinInstance = Instantiate(skin, transform);
+        skin.tag = "Enemy";
+
+        AssignHighlightablePart();
 
     }
+
+    void AssignHighlightablePart()
+    {
+        Element element = enemyData.elementType;
+
+        if (element == Element.Fire)
+            highlighteablePart = skinInstance.transform.GetChild(0);
+
+        if (element == Element.Water)
+            highlighteablePart = skinInstance.transform.GetChild(0).GetChild(0);
+
+        if (element == Element.Earth)
+            highlighteablePart = skinInstance.transform.GetChild(0).GetChild(0);
+
+        if (element == Element.Lightning)
+            highlighteablePart = skinInstance.transform.GetChild(0).GetChild(0);
+
+        if (element == Element.Wind)
+            highlighteablePart = skinInstance.transform.GetChild(0);
+    }
+
     public void Highlight()
     {
-        //print("Enemy Highlighted");
-        //gameObject.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 1);
-        //gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        print("Enemy Highlighted");
+        highlighteablePart.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 1);
         StartCoroutine(RemoveHighlightAfterSeconds(0.2f)); // highlight will be removed after 3 seconds
     }
 
     IEnumerator RemoveHighlightAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        //gameObject.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 0);
-        //gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        highlighteablePart.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 0);
     }
 
     // Update is called once per frame
@@ -80,12 +107,12 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     {
         healthController.TakeDamage(damage);
         Debug.Log(damage);
-         //if element is the same as my element, increase size
+        //if element is the same as my element, increase size
         if (element == enemyData.elementType)
-        {   
+        {
 
             GameObject skin = transform.GetChild(2).gameObject;
-            
+
             Debug.Log(skin.name);
             if (skin.transform.localScale.x < 2)
                 skin.transform.localScale += new Vector3(0.05f, 0.05f, 0.05f);
@@ -94,59 +121,64 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
         switch (element)
         {
             case Element.Fire:
-                Debug.Log("DANO FUEGO fshh"+transform.childCount);
-                
-                if(transform.childCount == 3){
-                    GameObject temp = Instantiate(fireParticles,transform).gameObject;
+                Debug.Log("DANO FUEGO fshh" + transform.childCount);
+
+                if (transform.childCount == 3)
+                {
+                    GameObject temp = Instantiate(fireParticles, transform).gameObject;
                     temp.GetComponent<ParticleSystem>().Play();
                     Destroy(temp, 5f);
-                    }
-                
+                }
 
-                
+
+
                 return;
             case Element.Water:
                 Debug.Log("DANO AGUA SPLASH");
 
-                if(transform.childCount == 3){
-                    GameObject temp = Instantiate(waterParticles,transform).gameObject;
+                if (transform.childCount == 3)
+                {
+                    GameObject temp = Instantiate(waterParticles, transform).gameObject;
                     temp.GetComponent<ParticleSystem>().Play();
                     Destroy(temp, 5f);
-                    }
-                
+                }
+
                 return;
             case Element.Wind:
                 Debug.Log("DANO AIRE WOOSH");
-                if(transform.childCount == 3){
-                    GameObject temp = Instantiate(windParticles,transform).gameObject;
+                if (transform.childCount == 3)
+                {
+                    GameObject temp = Instantiate(windParticles, transform).gameObject;
                     temp.GetComponent<ParticleSystem>().Play();
                     Destroy(temp, 5f);
-                    }
-                
+                }
+
                 return;
             case Element.Lightning:
                 Debug.Log("DANO ELECTRICIDAD ZAP");
-                if(transform.childCount == 3){
-                    GameObject temp = Instantiate(lightningParticles,transform).gameObject;
-                                    temp.GetComponent<ParticleSystem>().Play();
+                if (transform.childCount == 3)
+                {
+                    GameObject temp = Instantiate(lightningParticles, transform).gameObject;
+                    temp.GetComponent<ParticleSystem>().Play();
                     Destroy(temp, 5f);
-                    }
+                }
 
                 return;
             case Element.Earth:
                 Debug.Log("DANO TIERRA CRACK");
-                if(transform.childCount == 3){
-                    GameObject temp = Instantiate(earthParticles,transform).gameObject;
+                if (transform.childCount == 3)
+                {
+                    GameObject temp = Instantiate(earthParticles, transform).gameObject;
                     temp.GetComponent<ParticleSystem>().Play();
                     Destroy(temp, 5f);
-                    }
-                
+                }
+
                 return;
         }
 
-       
-        
-        
+
+
+
     }
 
     public void OnDie()
