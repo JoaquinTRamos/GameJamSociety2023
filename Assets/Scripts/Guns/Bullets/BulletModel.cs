@@ -10,7 +10,7 @@ namespace Guns.Bullets
         public class BulletStats
         {
             public Vector2 Dir;
-            public float Damage;
+            public int Damage;
             public float Speed;
             public LayerMask TargetsLayerMask;
         }
@@ -23,7 +23,7 @@ namespace Guns.Bullets
         private bool m_initialized;
 
         public BulletStats GetStats() => m_stats;
-        public void Initialize(Vector2 p_dir, float p_damage, float p_speed, LayerMask p_targetMask)
+        public void Initialize(Vector2 p_dir, int p_damage, float p_speed, LayerMask p_targetMask)
         {
             m_stats = new BulletStats();
             m_stats.Dir = p_dir.normalized;
@@ -37,6 +37,7 @@ namespace Guns.Bullets
 
         }
 
+    
 
         private void Update()
         {

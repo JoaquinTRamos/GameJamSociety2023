@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
 {
     public EnemyData enemyData;
     private HealthController healthController;
+    public ParticleSystem fireParticles;
 
     public GunModel gunModel;
 
@@ -68,22 +69,39 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     }
 
 
-    public void Damage(int damage, Element element, System.Numerics.Vector3 direction)
+    public void Damage(int damage, Element element, System.Numerics.Vector3 direction = default)
     {
-        healthController.TakeDamage(damage);
+        //healthController.TakeDamage(damage);
+        Debug.Log(damage);
+         //if element is the same as my element, increase size
+        if (element == enemyData.elementType)
+        {
+            if (transform.localScale.x < 3)
+                transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+        }
 
         switch (element)
         {
             case Element.Fire:
+                Debug.Log("DANO FUEGO fshh");
+                fireParticles.Play();
+                
                 return;
             case Element.Water:
+                Debug.Log("DANO AGUA SPLASH");
                 return;
             case Element.Wind:
+                Debug.Log("DANO AIRE WOOSH");
                 return;
             case Element.Lightning:
                 return;
             case Element.Earth:
+                Debug.Log("DANO TIERRA CRACK");
                 return;
         }
+
+       
+        
+        
     }
 }

@@ -17,7 +17,14 @@ namespace Guns.ElementAttacks
 
         public override void OnImpact(BulletModel p_model, Collider2D p_collision)
         {
-            Destroy(p_model);
+            /* //Check if it has a parent
+            if (p_collision.transform.parent == null) return;
+            if (p_collision.transform.parent.GetComponent<Collider2D>() == null) return;
+
+            p_collision = p_collision.transform.parent.GetComponent<Collider2D>(); */
+
+            p_collision.GetComponent<EnemyController>().Damage(p_model.GetStats().Damage, Element.Water);
+            //Destroy(p_model);
         }
     }
 }

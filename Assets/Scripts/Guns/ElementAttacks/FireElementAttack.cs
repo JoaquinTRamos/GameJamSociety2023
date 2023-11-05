@@ -26,14 +26,14 @@ namespace Guns.ElementAttacks
 
         public override void OnImpact(BulletModel p_model, Collider2D p_collision)
         {
-            if (p_collision.gameObject.GetComponent<IDamageable>() != null)
-            {
-                Debug.Log("hice daño");
-            }
+            /* //Check if it has a parent
+            if (p_collision.transform.parent == null) return;
+            if (p_collision.transform.parent.GetComponent<Collider2D>() == null) return;
 
-            //DoDamage
+            p_collision = p_collision.transform.parent.GetComponent<Collider2D>(); */
 
-            // m_randomVector3S.Remove(p_model);
+            p_collision.GetComponent<EnemyController>().Damage(p_model.GetStats().Damage, Element.Fire);
+            //Destroy(p_model);
         }
     }
 }
