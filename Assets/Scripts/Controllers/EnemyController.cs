@@ -28,13 +28,14 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
         healthController.Initialize(enemyData.health); */
         // print(gunModel);
 
-        ChangeColorOnElement();
+
+        Instantiate(enemyData.skin,transform);
     }
     public void Highlight()
     {
         //print("Enemy Highlighted");
         //gameObject.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 1);
-        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        //gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         StartCoroutine(RemoveHighlightAfterSeconds(0.2f)); // highlight will be removed after 3 seconds
     }
 
@@ -42,7 +43,7 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     {
         yield return new WaitForSeconds(seconds);
         //gameObject.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 0);
-        gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        //gameObject.GetComponent<SpriteRenderer>().color = Color.green;
     }
 
     // Update is called once per frame
@@ -56,7 +57,7 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     }
 
 
-    void ChangeColorOnElement()
+    /* void ChangeColorOnElement()
     {
         if (enemyData.elementType == Element.Fire)
             gameObject.GetComponent<SpriteRenderer>().color = Color.red;
@@ -70,7 +71,7 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
             gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         else
             print("No element assigned!");
-    }
+    } */
 
 
     public void Damage(int damage, Element element, System.Numerics.Vector3 direction = default)
@@ -89,47 +90,51 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
             case Element.Fire:
                 Debug.Log("DANO FUEGO fshh"+transform.childCount);
                 
-                if(transform.childCount == 1){
+                if(transform.childCount == 2){
                     GameObject temp = Instantiate(fireParticles,transform).gameObject;
+                    temp.GetComponent<ParticleSystem>().Play();
                     Destroy(temp, 5f);
                     }
-                transform.gameObject.GetComponent<ParticleSystem>().Play();
-
+                
 
                 
                 return;
             case Element.Water:
                 Debug.Log("DANO AGUA SPLASH");
 
-                if(transform.childCount == 1){
+                if(transform.childCount == 2){
                     GameObject temp = Instantiate(waterParticles,transform).gameObject;
+                    temp.GetComponent<ParticleSystem>().Play();
                     Destroy(temp, 5f);
                     }
-                transform.gameObject.GetComponent<ParticleSystem>().Play();
+                
                 return;
             case Element.Wind:
                 Debug.Log("DANO AIRE WOOSH");
-                if(transform.childCount == 1){
+                if(transform.childCount == 2){
                     GameObject temp = Instantiate(windParticles,transform).gameObject;
+                    temp.GetComponent<ParticleSystem>().Play();
                     Destroy(temp, 5f);
                     }
-                transform.gameObject.GetComponent<ParticleSystem>().Play();
+                
                 return;
             case Element.Lightning:
                 Debug.Log("DANO ELECTRICIDAD ZAP");
-                if(transform.childCount == 1){
+                if(transform.childCount == 2){
                     GameObject temp = Instantiate(lightningParticles,transform).gameObject;
+                                    temp.GetComponent<ParticleSystem>().Play();
                     Destroy(temp, 5f);
                     }
-                transform.gameObject.GetComponent<ParticleSystem>().Play();
+
                 return;
             case Element.Earth:
                 Debug.Log("DANO TIERRA CRACK");
-                if(transform.childCount == 1){
+                if(transform.childCount == 2){
                     GameObject temp = Instantiate(earthParticles,transform).gameObject;
+                    temp.GetComponent<ParticleSystem>().Play();
                     Destroy(temp, 5f);
                     }
-                transform.gameObject.GetComponent<ParticleSystem>().Play();
+                
                 return;
         }
 

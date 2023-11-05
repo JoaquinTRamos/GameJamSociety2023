@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 8239245812400362536}
   - component: {fileID: 7847508377568991042}
   m_Layer: 0
-  m_Name: Character (12)
+  m_Name: Earth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -27,12 +27,13 @@ namespace Guns.ElementAttacks
         public override void OnImpact(BulletModel p_model, Collider2D p_collision)
         {
             /* //Check if it has a parent
-            if (p_collision.transform.parent == null) return;
+            
             if (p_collision.transform.parent.GetComponent<Collider2D>() == null) return;
 
             p_collision = p_collision.transform.parent.GetComponent<Collider2D>(); */
-
-            p_collision.GetComponent<EnemyController>().Damage(p_model.GetStats().Damage, Element.Fire);
+            if(p_collision.tag == "Hitbox"){
+                p_collision = p_collision.transform.parent.GetComponent<Collider2D>();
+                p_collision.GetComponent<EnemyController>().Damage(p_model.GetStats().Damage, Element.Fire);}
             //Destroy(p_model);
         }
     }

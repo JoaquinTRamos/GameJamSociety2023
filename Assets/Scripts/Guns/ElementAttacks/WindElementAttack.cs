@@ -26,7 +26,9 @@ namespace Guns.ElementAttacks
 
             p_collision = p_collision.transform.parent.GetComponent<Collider2D>(); */
 
-            p_collision.GetComponent<EnemyController>().Damage(p_model.GetStats().Damage, Element.Wind);
+           if(p_collision.tag == "Hitbox"){
+                p_collision = p_collision.transform.parent.GetComponent<Collider2D>();
+                p_collision.GetComponent<EnemyController>().Damage(p_model.GetStats().Damage, Element.Wind);}
             //Destroy(p_model);
         }
     }

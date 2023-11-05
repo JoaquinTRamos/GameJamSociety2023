@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 3043329476595022019}
   - component: {fileID: 2373029006814896477}
   m_Layer: 0
-  m_Name: Character (76)
+  m_Name: Wind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

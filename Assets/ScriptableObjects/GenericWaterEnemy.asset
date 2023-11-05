@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dee7770eebdab5d46af5a2d1af085028, type: 3}
-  m_Name: GenericFireEnemy
+  m_Name: GenericWaterEnemy
   m_EditorClassIdentifier: 
   health: 10
   attackMod: 2
   speedMod: 4
-  elementType: 0
-  skin: {fileID: 1789626701735993215, guid: b6665c1d1459a9648b89cb38e5090a5e, type: 3}
+  elementType: 1
+  skin: {fileID: 564660651871660406, guid: 7e657be82e059cd4fab722425109b320, type: 3}
