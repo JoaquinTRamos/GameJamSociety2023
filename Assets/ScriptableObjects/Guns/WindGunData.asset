@@ -21,3 +21,8 @@ MonoBehaviour:
   gunSkin: {fileID: 3043329476595022016, guid: e4baef5eca788a14aa41d0dd1e9aa338, type: 3}
   fireRate: 0.5
   ammo: 25
+  explosionRadius: 30
+  explosionDamage: 40
+  explosionTimer: 2
+  particleExplosionSystem: {fileID: 6530800246334125821, guid: 8ed5755e835f4804aade9486e4cfd7b6, type: 3}
+  elementType: 4

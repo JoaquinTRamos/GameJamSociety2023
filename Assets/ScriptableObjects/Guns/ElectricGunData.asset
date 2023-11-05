@@ -17,7 +17,12 @@ MonoBehaviour:
   speed: 10
   targetMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   gunSkin: {fileID: 8898566659909274713, guid: 12df7e1d6e59b664ab788e8bd58e7501, type: 3}
   fireRate: 2
   ammo: 10
+  explosionRadius: 10
+  explosionDamage: 50
+  explosionTimer: 1
+  particleExplosionSystem: {fileID: 6530800246334125821, guid: 65a51baadd941a34ea9575065e38e4fa, type: 3}
+  elementType: 3

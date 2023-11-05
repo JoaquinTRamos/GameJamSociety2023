@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         currGun = null;
         Rigidbody2D rb = newGun.GetComponent<Rigidbody2D>();
         rb.velocity = newGun.transform.up * throwSpeed;
+        newGun.Throw();
 
     }
 
@@ -84,7 +85,6 @@ public class PlayerController : MonoBehaviour, IDamageable
                 currGun.transform.RotateAround(transform.position, Vector3.forward, (360+throwSpeed*20) * Time.deltaTime);
                 if (throwSpeed < 30f)
                     throwSpeed += throwAcceleration * Time.deltaTime;
-                Debug.Log(throwSpeed);
             }
             yield return null;
         }
@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             TakeEnemy(closestEnemy);
         }
         if (inBoundingBox())
-            transform.Translate(new Vector3(horMove, verMove, 0) * speedMod * Time.deltaTime); // De alguna manera hacer que rebote el pibe
+            transform.Translate(new Vector3(horMove, verMove, 0) * (speedMod * Time.deltaTime)); // De alguna manera hacer que rebote el pibe
 
         if (Input.GetMouseButton(0))
         {
