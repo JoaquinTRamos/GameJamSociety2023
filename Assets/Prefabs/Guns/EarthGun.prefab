@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7662531229161038471}
   - component: {fileID: -429858645067007142}
   m_Layer: 0
-  m_Name: WindGun
+  m_Name: EarthGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 7662531229161038471}
-  data: {fileID: 11400000, guid: 67d58fee95a661f41b453da0a4ab9c9f, type: 2}
+  data: {fileID: 11400000, guid: 515d34a10afbf8d48a9d61d6ca39563c, type: 2}
   TEST_DATAS: []

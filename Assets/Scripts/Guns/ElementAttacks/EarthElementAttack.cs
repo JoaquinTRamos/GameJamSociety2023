@@ -19,6 +19,7 @@ namespace Guns.ElementAttacks
 
         public override void OnImpact(BulletModel p_model, Collider2D p_collision)
         {
+            Debug.Log("COLISION");
             var rnd = Random.Range(2, 11);
             for (int i = 0; i < rnd; i++)
             {

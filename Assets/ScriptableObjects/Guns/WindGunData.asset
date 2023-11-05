@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dee7770eebdab5d46af5a2d1af085028, type: 3}
-  m_Name: GenericFireEnemy
+  m_Script: {fileID: 11500000, guid: 2b4f6e2851d64ca0a897bbc3a99b4bad, type: 3}
+  m_Name: WindGunData
   m_EditorClassIdentifier: 
-  health: 10
-  attackMod: 2
-  speedMod: 4
-  elementType: 0
+  bulletModel: {fileID: 6118098588556143342, guid: 7c16a9f226c256947b5644ef8f077130, type: 3}
+  damage: 10
+  speed: 10
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 2048

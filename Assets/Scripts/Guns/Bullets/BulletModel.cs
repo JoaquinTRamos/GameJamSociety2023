@@ -36,6 +36,7 @@ namespace Guns.Bullets
             myElementAttack.InitAttack(this);
             m_initialized = true;
             Destroy(gameObject, lifeTime);
+
         }
         
         
@@ -55,9 +56,10 @@ namespace Guns.Bullets
 
         private void OnCollisionStay2D(Collision2D collision)
         {
-            if(!collision.gameObject.layer.Equals(m_stats.TargetsLayerMask.value))
-                return;
             Debug.Log("COLISION");
+            if(!collision.gameObject.CompareTag("Enemy"))
+                return;
+            
             
             //myElementAttack.OnImpact(this, collision);
         }
