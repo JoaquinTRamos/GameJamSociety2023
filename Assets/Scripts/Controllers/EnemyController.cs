@@ -11,6 +11,10 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     public EnemyData enemyData;
     private HealthController healthController;
     public ParticleSystem fireParticles;
+    public ParticleSystem waterParticles;
+    public ParticleSystem windParticles;
+    public ParticleSystem earthParticles;
+    public ParticleSystem lightningParticles;
 
     public GunModel gunModel;
 
@@ -83,20 +87,49 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
         switch (element)
         {
             case Element.Fire:
-                Debug.Log("DANO FUEGO fshh");
-                fireParticles.Play();
+                Debug.Log("DANO FUEGO fshh"+transform.childCount);
+                
+                if(transform.childCount == 1){
+                    GameObject temp = Instantiate(fireParticles,transform).gameObject;
+                    Destroy(temp, 5f);
+                    }
+                transform.gameObject.GetComponent<ParticleSystem>().Play();
+
+
                 
                 return;
             case Element.Water:
                 Debug.Log("DANO AGUA SPLASH");
+
+                if(transform.childCount == 1){
+                    GameObject temp = Instantiate(waterParticles,transform).gameObject;
+                    Destroy(temp, 5f);
+                    }
+                transform.gameObject.GetComponent<ParticleSystem>().Play();
                 return;
             case Element.Wind:
                 Debug.Log("DANO AIRE WOOSH");
+                if(transform.childCount == 1){
+                    GameObject temp = Instantiate(windParticles,transform).gameObject;
+                    Destroy(temp, 5f);
+                    }
+                transform.gameObject.GetComponent<ParticleSystem>().Play();
                 return;
             case Element.Lightning:
+                Debug.Log("DANO ELECTRICIDAD ZAP");
+                if(transform.childCount == 1){
+                    GameObject temp = Instantiate(lightningParticles,transform).gameObject;
+                    Destroy(temp, 5f);
+                    }
+                transform.gameObject.GetComponent<ParticleSystem>().Play();
                 return;
             case Element.Earth:
                 Debug.Log("DANO TIERRA CRACK");
+                if(transform.childCount == 1){
+                    GameObject temp = Instantiate(earthParticles,transform).gameObject;
+                    Destroy(temp, 5f);
+                    }
+                transform.gameObject.GetComponent<ParticleSystem>().Play();
                 return;
         }
 
