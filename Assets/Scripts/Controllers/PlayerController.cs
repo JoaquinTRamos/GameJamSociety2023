@@ -16,6 +16,12 @@ public class PlayerController : MonoBehaviour
     private Coroutine throwCoroutine;
     EnemyController closestEnemy = null;
 
+    private float throwSpeed = 0f;
+    public const float throwAcceleration = 2f; // The speed at which the throw speed increases
+
+    public const float cooldown = 0.5f;
+
+
     [SerializeField] private float detectionRadius = 3f;
     private List<EnemyController> EnemiesInRange = new List<EnemyController>();
 
@@ -30,11 +36,12 @@ public class PlayerController : MonoBehaviour
     {
         if (currGun != null)
             Destroy(currGun.gameObject);
+        throwSpeed = 0f;
         GunModel gun = enemy.GetGun();
         currGun = Instantiate(gun, transform);
         Instantiate(gun.GetData().gunSkin, currGun.transform);
         //move currgun a bit down and left to the player
-        currGun.transform.localPosition = new Vector2(0.5f, -0.5f);
+        currGun.transform.localPosition = new Vector2(0.5f, 0.25f);
 
         //currGun.transform.localPosition = new Vector2(0, -10);
         enemy.OnDie();
@@ -54,16 +61,27 @@ public class PlayerController : MonoBehaviour
         currGun.Shoot(dir);
     }
 
-    /* private void Throw()
+    private void Throw()
     {
-        currGun.Throw();
-    } */
+        currGun.transform.SetParent(null);
+        GunModel newGun = currGun;
+        Instantiate(newGun.GetData());
+        currGun = null;
+        Rigidbody2D rb = newGun.GetComponent<Rigidbody2D>();
+        rb.velocity = newGun.transform.up * throwSpeed;
+
+    }
 
     private IEnumerator Throwing()
     {
         while (isThrowing)
         {
-            currGun.transform.RotateAround(transform.position, Vector3.forward, 360 * Time.deltaTime);
+            if (currGun.transform.parent != null){
+                currGun.transform.RotateAround(transform.position, Vector3.forward, (360+throwSpeed*20) * Time.deltaTime);
+                if (throwSpeed < 30f)
+                    throwSpeed += throwAcceleration * Time.deltaTime;
+                Debug.Log(throwSpeed);
+            }
             yield return null;
         }
     }
@@ -139,28 +157,27 @@ public class PlayerController : MonoBehaviour
                 Shoot();
         }
 
-        if (Input.GetMouseButton(1))
-        {
-            if (currGun != null)
-                if (Input.GetMouseButton(1) && !isThrowing)
-                {
-                    isThrowing = true;
-                    throwCoroutine = StartCoroutine(Throwing());
-                }
 
-            // If 1 key is released and the gun is being thrown, stop the throw
-            if (Input.GetMouseButton(1) && isThrowing)
+        if (currGun != null)
+            if (Input.GetMouseButton(1) && !isThrowing)
+            {
+                isThrowing = true;
+                throwCoroutine = StartCoroutine(Throwing());
+            }
+
+        // If 1 key is released and the gun is being thrown, stop the throw
+        if (Input.GetMouseButtonUp(1) && isThrowing)
+        {
+            if (throwCoroutine != null)
             {
                 isThrowing = false;
-                if (throwCoroutine != null)
-                {
-                    StopCoroutine(throwCoroutine);
-                    Debug.Log("done");
-                }
+                StopCoroutine(throwCoroutine);
+
+                Throw();
+                
             }
-            else
-                print("An attempt to throw has been made");
         }
+
 
     }
 

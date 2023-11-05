@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7662531229161038471}
   - component: {fileID: -429858645067007142}
   - component: {fileID: 1779818658749095889}
+  - component: {fileID: 4195086668803047899}
   m_Layer: 0
   m_Name: EarthGun
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   shootPoint: {fileID: 7662531229161038471}
   data: {fileID: 11400000, guid: 515d34a10afbf8d48a9d61d6ca39563c, type: 2}
   TEST_DATAS: []
+  ammo: 0
 --- !u!212 &1779818658749095889
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -100,3 +102,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &4195086668803047899
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871675377122674111}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

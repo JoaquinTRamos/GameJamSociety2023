@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: ElectricGunData
   m_EditorClassIdentifier: 
   bulletModel: {fileID: 6118098588556143342, guid: 3271ed84db0aaaf48996a0c587ee8c1c, type: 3}
-  damage: 10
+  damage: 1
   speed: 10
   targetMask:
     serializedVersion: 2
     m_Bits: 0
   gunSkin: {fileID: 8898566659909274713, guid: 12df7e1d6e59b664ab788e8bd58e7501, type: 3}
+  fireRate: 2
+  ammo: 10
