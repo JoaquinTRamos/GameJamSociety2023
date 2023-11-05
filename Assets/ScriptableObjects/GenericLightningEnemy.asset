@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee7770eebdab5d46af5a2d1af085028, type: 3}
   m_Name: GenericLightningEnemy
   m_EditorClassIdentifier: 
-  health: 10
+  health: 20
   attackMod: 2
-  speedMod: 4
+  speedMod: 2
   elementType: 3
   skin: {fileID: 4533046827902932077, guid: 96944988f695d4c47af0515556018ce3, type: 3}

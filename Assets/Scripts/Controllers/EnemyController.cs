@@ -17,6 +17,10 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     public ParticleSystem windParticles;
     public ParticleSystem earthParticles;
     public ParticleSystem lightningParticles;
+    private bool isStunned = false;
+    private bool isDelayed = false;
+    private float originalSpeed;
+
 
     public GunModel gunModel;
 
@@ -80,32 +84,20 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     {
         Vector3 playerPosition = GameManager.instance.playerObject.transform.position;
         Vector3 directionToPlayer = (playerPosition - transform.position).normalized;
-        Vector3 movement = Time.deltaTime * enemyData.speedMod * directionToPlayer;
+        Vector3 movement;
+        if (isStunned)
+            movement = Time.deltaTime * 0 * directionToPlayer;
+
+        else if (isDelayed)
+            movement = Time.deltaTime * enemyData.speedMod * directionToPlayer / 2f;
+        else
+            movement = Time.deltaTime * enemyData.speedMod * directionToPlayer;
 
         transform.Translate(movement);
     }
 
-
-    /* void ChangeColorOnElement()
-    {
-        if (enemyData.elementType == Element.Fire)
-            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        else if (enemyData.elementType == Element.Wind)
-            gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-        else if (enemyData.elementType == Element.Earth)
-            gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
-        else if (enemyData.elementType == Element.Lightning)
-            gameObject.GetComponent<SpriteRenderer>().color = Color.magenta;
-        else if (enemyData.elementType == Element.Water)
-            gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-        else
-            print("No element assigned!");
-    } */
-
-
     public void Damage(int damage, Element element)
     {
-        healthController.TakeDamage(damage);
         Debug.Log(damage);
         //if element is the same as my element, increase size
         if (element == enemyData.elementType)
@@ -113,11 +105,12 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
 
             GameObject skin = transform.GetChild(2).gameObject;
 
-            Debug.Log(skin.name);
+            damage = damage / 2;
             if (skin.transform.localScale.x < 2)
                 skin.transform.localScale += new Vector3(0.05f, 0.05f, 0.05f);
         }
-
+        Debug.Log(damage);
+        healthController.TakeDamage(damage);
         switch (element)
         {
             case Element.Fire:
@@ -126,12 +119,15 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
                 if (transform.childCount == 3)
                 {
                     GameObject temp = Instantiate(fireParticles, transform).gameObject;
+                Debug.Log("DANO FUEGO fshh" + transform.childCount);
+
+                if (transform.childCount == 3)
+                {
+                    GameObject temp = Instantiate(fireParticles, transform).gameObject;
                     temp.GetComponent<ParticleSystem>().Play();
+                    StartCoroutine(TakeDamageOverTime(5, 5f));
                     Destroy(temp, 5f);
                 }
-
-
-
                 return;
             case Element.Water:
                 Debug.Log("DANO AGUA SPLASH");
@@ -139,7 +135,7 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
                 if (transform.childCount == 3)
                 {
                     GameObject temp = Instantiate(waterParticles, transform).gameObject;
-                    temp.GetComponent<ParticleSystem>().Play();
+                    StartCoroutine(delayCoroutine(5f));
                     Destroy(temp, 5f);
                 }
 
@@ -149,8 +145,14 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
                 if (transform.childCount == 3)
                 {
                     GameObject temp = Instantiate(windParticles, transform).gameObject;
+                if (transform.childCount == 3)
+                {
+                    GameObject temp = Instantiate(windParticles, transform).gameObject;
                     temp.GetComponent<ParticleSystem>().Play();
+                    StartCoroutine(PushBack(10f, 1f));
                     Destroy(temp, 5f);
+                }
+
                 }
 
                 return;
@@ -160,7 +162,9 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
                 {
                     GameObject temp = Instantiate(lightningParticles, transform).gameObject;
                     temp.GetComponent<ParticleSystem>().Play();
-                    Destroy(temp, 5f);
+                    Stun(3f);
+
+                    Destroy(temp, 1f);
                 }
 
                 return;
@@ -169,8 +173,13 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
                 if (transform.childCount == 3)
                 {
                     GameObject temp = Instantiate(earthParticles, transform).gameObject;
+                if (transform.childCount == 3)
+                {
+                    GameObject temp = Instantiate(earthParticles, transform).gameObject;
                     temp.GetComponent<ParticleSystem>().Play();
                     Destroy(temp, 5f);
+                }
+
                 }
 
                 return;
@@ -179,13 +188,72 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
 
 
 
-    }
 
+
+
+    }
+    private IEnumerator PushBack(float distance, float duration)
+    {
+        Stun(duration);
+        Vector3 directionToPlayer = (GameManager.instance.playerObject.transform.position - transform.position).normalized;
+        Vector3 targetPosition = transform.position - directionToPlayer * distance;
+
+        float timer = 0;
+        Vector3 startPosition = transform.position;
+
+        while (timer < duration)
+        {
+            float t = timer / duration; // Normalized time between 0 and 1
+            transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the enemy ends up at the exact target position
+        transform.position = targetPosition;
+    }
+    private IEnumerator TakeDamageOverTime(int damage, float duration)
+    {
+        float timer = 0;
+
+        while (timer < duration)
+        {
+            healthController.TakeDamage(damage);
+            timer += 1f;
+            yield return new WaitForSeconds(1f);
+        }
+    }
+    void Stun(float duration)
+    {
+        if (!isStunned)
+        {
+            StartCoroutine(StunCoroutine(duration));
+        }
+    }
+    private IEnumerator StunCoroutine(float n)
+    {
+        isStunned = true;
+
+
+        yield return new WaitForSeconds(n);
+
+        isStunned = false;
+    }
+    private IEnumerator delayCoroutine(float n)
+    {
+        isDelayed = true;
+
+
+        yield return new WaitForSeconds(n);
+
+        isDelayed = false;
+    }
     public void OnDie()
     {
         GameManager.instance.enemyManager.dictEnemiesVivos.Remove(id);
         Destroy(gameObject);
     }
+
 
     private void OnTakeDamage(int max, int current)
     {

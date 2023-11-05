@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dee7770eebdab5d46af5a2d1af085028, type: 3}
-  m_Name: GenericEarthEnemy
+  m_Script: {fileID: 11500000, guid: 4c09b8d33897d1e4da9ce05bf97d51c1, type: 3}
+  m_Name: ElectricElementAttack
   m_EditorClassIdentifier: 
-  health: 100
-  attackMod: 2
-  speedMod: 4
-  elementType: 2
-  skin: {fileID: 8239245812400362537, guid: da87870c43885da43b5816cfd4d5ec9e, type: 3}

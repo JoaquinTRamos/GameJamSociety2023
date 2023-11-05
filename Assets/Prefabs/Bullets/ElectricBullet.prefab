@@ -193,5 +193,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c17c8ec7e4745a5a1015eecf288c1e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myElementAttack: {fileID: 11400000, guid: d741fc3281b1dcb409170ec8176293b4, type: 2}
+  myElementAttack: {fileID: 11400000, guid: 58e5ebfa4166f3243956861f70e95b31, type: 2}
   lifeTime: 2
