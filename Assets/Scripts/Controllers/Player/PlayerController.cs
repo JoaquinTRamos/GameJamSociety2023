@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Controllers;
 using Controllers.Player;
 using Guns;
 using Managers;
@@ -15,7 +16,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     bool isThrowing = false;
     private Coroutine throwCoroutine;
     EnemyController closestEnemy = null;
-    [SerializeField] private float maxHp;
+    [SerializeField] private float maxHp = 100f;
     private float throwSpeed = 0f;
     public const float throwAcceleration = 2f; // The speed at which the throw speed increases
 
@@ -30,8 +31,9 @@ private float m_currHp;
     // Start is called before the first frame update
     void Start()
     {
-m_currHp = maxHp;
-eatCurrentCooldown = 0;
+        m_currHp = maxHp;
+        eatCurrentCooldown = 0;
+        m_view = GetComponent<PlayerView>();
         StartCoroutine(CheckDistances());
     }
 
@@ -205,7 +207,9 @@ eatCurrentCooldown = 0;
     public void Damage(int damage, Element element)
     {
         m_currHp -= damage;
-        m_view.UpdateHpBar((m_currHp / maxHp) / 100f);
+        m_view.UpdateHpBar((m_currHp / maxHp));
+        
+        
         if(m_currHp <= 0)
             Die();
     }
