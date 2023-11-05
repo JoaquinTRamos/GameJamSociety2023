@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
     public int health;
-    public float attackMod;
+    public int attackMod;
     public float speedMod;
     public Element elementType;
     public GameObject skin;
