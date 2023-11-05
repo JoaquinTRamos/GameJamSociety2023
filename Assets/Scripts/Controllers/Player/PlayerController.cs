@@ -1,13 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Controllers.Player;
 using Guns;
+using Managers;
 using UnityEditor.XR;
 using UnityEngine;
 
 
-// Asignar por inspector el arma que tiene que ser el enemigo
-public class PlayerController : MonoBehaviour
+[RequireComponent(typeof(PlayerView))]
+public class PlayerController : MonoBehaviour, IDamageable
 {
     float horMove, verMove;
     [SerializeField] float speedMod;
@@ -15,7 +17,7 @@ public class PlayerController : MonoBehaviour
     bool isThrowing = false;
     private Coroutine throwCoroutine;
     EnemyController closestEnemy = null;
-
+    [SerializeField] private float maxHp;
     private float throwSpeed = 0f;
     public const float throwAcceleration = 2f; // The speed at which the throw speed increases
 
@@ -23,12 +25,14 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField] private float detectionRadius = 3f;
+    private PlayerView m_view;
     private List<EnemyController> EnemiesInRange = new List<EnemyController>();
-
+    private float m_currHp;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_currHp = maxHp;
         StartCoroutine(CheckDistances());
     }
 
@@ -187,5 +191,18 @@ public class PlayerController : MonoBehaviour
             return true;
 
         return false;
+    }
+
+    public void Damage(int damage, Element element)
+    {
+        m_currHp -= damage;
+        m_view.UpdateHpBar((m_currHp / maxHp) / 100f);
+        if(m_currHp <= 0)
+            Die();
+    }
+
+    private void Die()
+    {
+        GameManager.instance.OnPlayerDeath();
     }
 }

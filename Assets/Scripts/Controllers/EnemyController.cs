@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Guns;
+using Managers;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour, IEnemy, IDamageable

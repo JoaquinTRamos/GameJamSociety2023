@@ -1,81 +1,82 @@
-using System.Linq;
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class WaveManager : MonoBehaviour
+namespace Managers
 {
-    public List<Wave> waves = new List<Wave>();
-    [SerializeField] int baseEnemyQuantity, lastEnemyQuantity;
-    [SerializeField] float scalarEnemyQuantity;
-
-    // Start is called before the first frame update
-    void Start()
+    public class WaveManager : MonoBehaviour
     {
-        lastEnemyQuantity = baseEnemyQuantity;
-    }
+        public List<Wave> waves = new List<Wave>();
+        [SerializeField] int baseEnemyQuantity, lastEnemyQuantity;
+        [SerializeField] float scalarEnemyQuantity;
 
-    public Wave GetWave(int index)
-    {
-        if (waves.Count - index < 3)
+        // Start is called before the first frame update
+        void Start()
         {
-            GenerateRandomWave(Mathf.FloorToInt(lastEnemyQuantity * (1f + scalarEnemyQuantity)));
-            lastEnemyQuantity = Mathf.FloorToInt(lastEnemyQuantity * (1f + scalarEnemyQuantity));
+            lastEnemyQuantity = baseEnemyQuantity;
         }
 
-        return waves[index];
-    }
-
-    void GenerateRandomWave(int enemyQuantity)
-    {
-        Wave wave = new Wave();
-
-        List<float> randFloats = new List<float>();
-
-        for (int i = 0; i < 4; i++)
+        public Wave GetWave(int index)
         {
-
-            if (i == 0)
+            if (waves.Count - index < 3)
             {
-                randFloats.Add(UnityEngine.Random.Range(0.01f, 0.6f));
-                continue;
+                GenerateRandomWave(Mathf.FloorToInt(lastEnemyQuantity * (1f + scalarEnemyQuantity)));
+                lastEnemyQuantity = Mathf.FloorToInt(lastEnemyQuantity * (1f + scalarEnemyQuantity));
             }
 
-            if (randFloats[i - 1] == 1f)
-                break;
-
-            randFloats.Add(UnityEngine.Random.Range(randFloats[i - 1], 1f));
+            return waves[index];
         }
 
-        List<Element> elements = new List<Element>
+        void GenerateRandomWave(int enemyQuantity)
         {
-            Element.Fire,
-            Element.Water,
-            Element.Earth,
-            Element.Wind,
-            Element.Lightning
-        };
+            Wave wave = new Wave();
 
-        elements = elements.OrderBy(x => UnityEngine.Random.value).ToList();
-        int j = 0;
+            List<float> randFloats = new List<float>();
 
-        foreach (float f in randFloats)
-        {
-            if (j == 0)
+            for (int i = 0; i < 4; i++)
             {
-                wave.AssignElementQuantity(elements[j], Mathf.FloorToInt(f * enemyQuantity));
+
+                if (i == 0)
+                {
+                    randFloats.Add(UnityEngine.Random.Range(0.01f, 0.6f));
+                    continue;
+                }
+
+                if (randFloats[i - 1] == 1f)
+                    break;
+
+                randFloats.Add(UnityEngine.Random.Range(randFloats[i - 1], 1f));
+            }
+
+            List<Element> elements = new List<Element>
+            {
+                Element.Fire,
+                Element.Water,
+                Element.Earth,
+                Element.Wind,
+                Element.Lightning
+            };
+
+            elements = elements.OrderBy(x => UnityEngine.Random.value).ToList();
+            int j = 0;
+
+            foreach (float f in randFloats)
+            {
+                if (j == 0)
+                {
+                    wave.AssignElementQuantity(elements[j], Mathf.FloorToInt(f * enemyQuantity));
+                    j++;
+                    continue;
+                }
+
+                wave.AssignElementQuantity(elements[j], Mathf.RoundToInt((f - randFloats[j - 1]) * enemyQuantity));
                 j++;
-                continue;
+
             }
 
-            wave.AssignElementQuantity(elements[j], Mathf.RoundToInt((f - randFloats[j - 1]) * enemyQuantity));
-            j++;
+            waves.Add(wave);
+
 
         }
-
-        waves.Add(wave);
-
-
     }
 }
