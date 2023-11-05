@@ -81,7 +81,7 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
          //if element is the same as my element, increase size
         if (element == enemyData.elementType)
         {
-            if (transform.localScale.x < 3)
+            if (transform.localScale.x < 2)
                 transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
         }
 
