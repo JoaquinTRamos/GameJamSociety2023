@@ -11,13 +11,14 @@ namespace Guns
         [SerializeField] private Transform shootPoint;
         [SerializeField] private GunData data;
         [SerializeField] private List<GunData> TEST_DATAS;
-private bool isThrowing = false;
         public GunData GetData(){
             return data;
         }
         
 
         float cooldown;
+
+        
         [SerializeField] private float ammo;
 
         private void Start()
@@ -45,19 +46,10 @@ private bool isThrowing = false;
 
         public void Throw()
         {
-            if(Input.GetKeyDown(KeyCode.Mouse1)&&!isThrowing){
-                isThrowing = true;
-                StartCoroutine(Throwing());
-            }
-            else if(Input.GetKeyUp(KeyCode.Mouse1)&&isThrowing){
-                isThrowing = false;
-            }
+            //This function is only called after it was thrown, so it just handles the explosion after the fact
+            
+            //TODO add VFX
         }
-        private IEnumerator Throwing(){
-            while(isThrowing){
-                transform.Rotate(0,0,1);
-                yield return null;
-            }
-        }
+        
     }
 }

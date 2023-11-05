@@ -13,6 +13,10 @@ namespace Guns
         public GameObject gunSkin;
         public float fireRate;
         public float ammo;
+        public float explosionRadius;
+        public float explosionDistance;
+
+        public GameObject explosionArea;
     }
 
 
