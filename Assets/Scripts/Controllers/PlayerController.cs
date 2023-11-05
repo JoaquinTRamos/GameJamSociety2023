@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         if (currGun != null)
             Destroy(currGun.gameObject);
         currGun = Instantiate(enemy.GetGun(), transform);
-        Destroy(enemy.gameObject);
+        enemy.OnDie();
         //currGun.transform.SetParent(transform);
         //currGun.transform.position = new Vector2();
 

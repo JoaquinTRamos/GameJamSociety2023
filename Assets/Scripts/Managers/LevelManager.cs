@@ -25,12 +25,17 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentWave.GetEnemyCount() == 0) // Y que todos los enemigos estan muertos 
+        if (currentWave.GetEnemyCount() == 0 && GameManager.instance.enemyManager.dictEnemiesVivos.Count == 0) // Y que todos los enemigos estan muertos 
         {
             // Init Wave -> - UI Wave x -
             // Timer 5
+            GameManager.instance.enemyManager.canSpawn = true;
             currentWave = waveManager.GetWave(currentWaveIndex);
             currentWaveIndex += 1;
+        }
+        else if (currentWave.GetEnemyCount() == 0 && GameManager.instance.enemyManager.dictEnemiesVivos.Count != 0)
+        {
+            GameManager.instance.enemyManager.canSpawn = false;
         }
     }
 

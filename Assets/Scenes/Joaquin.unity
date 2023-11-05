@@ -154,13 +154,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9270c3b4b366cd24a8a91f560b9d8589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listaEnemigos: []
   enemyPrefabs:
-  - {fileID: 1520407991168963934, guid: 5a2c14e2790e01f47aabba64f98ae493, type: 3}
-  - {fileID: 1520407991168963934, guid: 516fd702aa06ecc42941bde57697e8e4, type: 3}
-  - {fileID: 1520407991168963934, guid: 1822da5fc05afc3448b73f8bc2ccd736, type: 3}
-  - {fileID: 1520407991168963934, guid: d32e1d97ba397504080bcff9855a9d53, type: 3}
+  - {fileID: 1520407991168963934, guid: eeb92780674f02d4f9572cd28088e8f4, type: 3}
+  - {fileID: 1520407991168963934, guid: cd401b1ea7a20634aabf68ee05644504, type: 3}
+  - {fileID: 1520407991168963934, guid: f5ad81063cd3f584aac877f523a2d821, type: 3}
+  - {fileID: 1520407991168963934, guid: 862ab12d63cdfcf459bd50c8a9990368, type: 3}
   - {fileID: 1520407991168963934, guid: 44ed243fa52b1ad419f01188dae584db, type: 3}
+  enemyCounter: 0
+  canSpawn: 0
 --- !u!4 &739232048
 Transform:
   m_ObjectHideFlags: 0
@@ -208,11 +209,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - fire: 5
+  - fire: 3
     water: 0
-    earth: 4
+    earth: 2
     lightning: 0
     wind: 0
+  - fire: 0
+    water: 0
+    earth: 0
+    lightning: 5
+    wind: 1
+  - fire: 2
+    water: 2
+    earth: 2
+    lightning: 2
+    wind: 2
 --- !u!1 &848259208
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
 {
     public EnemyData enemyData;
     private HealthController healthController;
-
+    public int id;
     public GunModel gunModel;
 
     public GunModel GetGun() => gunModel;
@@ -85,8 +85,9 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
         }
     }
 
-    private void OnDie()
+    public void OnDie()
     {
+        GameManager.instance.enemyManager.dictEnemiesVivos.Remove(id);
         Destroy(gameObject);
     }
 

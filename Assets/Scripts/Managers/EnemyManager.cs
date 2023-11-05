@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class EnemyManager : MonoBehaviour
 {
-    [HideInInspector] public List<GameObject> listaEnemigos = new List<GameObject>();
+    [HideInInspector] public Dictionary<int, GameObject> dictEnemiesVivos = new Dictionary<int, GameObject>();
     [SerializeField] List<GameObject> enemyPrefabs = new List<GameObject>();
+    [HideInInspector] public int enemyCounter;
+    [HideInInspector] public bool canSpawn;
 
 
     // Start is called before the first frame update

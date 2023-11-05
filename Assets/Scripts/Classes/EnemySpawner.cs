@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameManager.instance.enemyManager.listaEnemigos.Add(CheckSpawnEnemy());
+        CheckSpawnEnemy();
     }
 
     GameObject CheckSpawnEnemy()
@@ -44,10 +44,13 @@ public class EnemySpawner : MonoBehaviour
 
             Vector3 spawnPoint = player.position + spawnLooker.up * dist;
 
-            if (GameManager.instance.levelManager.mapBounds.Contains(spawnPoint))
+            if (GameManager.instance.levelManager.mapBounds.Contains(spawnPoint) && GameManager.instance.enemyManager.canSpawn)
             {
                 GameObject enemy = Instantiate(GameManager.instance.enemyManager.GetEnemy(), transform);
                 enemy.transform.position = spawnPoint;
+                GameManager.instance.enemyManager.dictEnemiesVivos.Add(GameManager.instance.enemyManager.enemyCounter, enemy);
+                enemy.GetComponent<EnemyController>().id = GameManager.instance.enemyManager.enemyCounter;
+                GameManager.instance.enemyManager.enemyCounter += 1;
                 return enemy;
             }
 
