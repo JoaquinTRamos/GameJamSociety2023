@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -20,12 +21,20 @@ public class EnemyManager : MonoBehaviour
 
     }
 
-    public GameObject GetEnemy(Element element)
+    public GameObject GetEnemy()
     {
+        Wave currWave = GameManager.instance.levelManager.GetCurrentWave();
+        List<Element> validElements = currWave.GetValidElements();
+
+        int randomIndex = Random.Range(0, validElements.Count - 1);
+
         foreach (GameObject enemy in enemyPrefabs)
         {
-            if (enemy.GetComponent<EnemyController>().enemyData.elementType == element)
+            if (enemy.GetComponent<EnemyController>().enemyData.elementType == validElements[randomIndex])
+            {
+                currWave.SubtractFromElement(validElements[randomIndex]);
                 return enemy;
+            }
         }
 
         return null;

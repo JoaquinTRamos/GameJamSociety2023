@@ -7,6 +7,9 @@ using UnityEngine.UIElements;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Header("Show Gizmos")]
+    [SerializeField] bool showGizmos;
+
     [Header("Bounding Plane - Takes First 2 elements of list")]
     [SerializeField] List<float> circleRadii = new List<float>();
     [SerializeField] float cooldown;
@@ -43,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
 
             if (GameManager.instance.levelManager.mapBounds.Contains(spawnPoint))
             {
-                GameObject enemy = Instantiate(GameManager.instance.enemyManager.GetEnemy(Element.Fire), transform);
+                GameObject enemy = Instantiate(GameManager.instance.enemyManager.GetEnemy(), transform);
                 enemy.transform.position = spawnPoint;
                 return enemy;
             }
@@ -57,6 +60,10 @@ public class EnemySpawner : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        if (!showGizmos)
+            return;
+
+
         Gizmos.color = Color.red;
 
         foreach (float radius in circleRadii)
@@ -67,6 +74,5 @@ public class EnemySpawner : MonoBehaviour
         Gizmos.color = Color.blue;
 
         Gizmos.DrawLine(player.position, player.position + spawnLooker.up * dist);
-
     }
 }

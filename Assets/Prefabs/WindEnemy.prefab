@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 8418363798577675255}
   - component: {fileID: 4291622688528641020}
   m_Layer: 11
-  m_Name: Enemy
+  m_Name: WindEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb2a357f7cfbbf4183c7a33451aed77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: d586189a478b31d428423a9500518978, type: 2}
+  enemyData: {fileID: 11400000, guid: 84196b826c1393244967daa59ada3e08, type: 2}
   gunModel: {fileID: -429858645067007142, guid: 99c4848f8d6b8654cb910c24df6935cf, type: 3}
 --- !u!58 &8418363798577675255
 CircleCollider2D:
