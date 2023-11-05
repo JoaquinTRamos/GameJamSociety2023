@@ -1036,6 +1036,7 @@ MonoBehaviour:
     lightning: 0
     wind: 0
   nextWavePanel: {fileID: 1764497649}
+  waveCountText: {fileID: 1586839291}
 --- !u!1 &1586839289
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,7 +1237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1764497645
 RectTransform:
   m_ObjectHideFlags: 0
