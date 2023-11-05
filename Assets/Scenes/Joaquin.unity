@@ -358,6 +358,9 @@ MonoBehaviour:
     earth: 2
     lightning: 2
     wind: 2
+  baseEnemyQuantity: 10
+  lastEnemyQuantity: 0
+  scalarEnemyQuantity: 0.2
 --- !u!1 &848259208
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +440,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 50, y: 50, z: 1}
+  m_LocalScale: {x: 1000, y: 1000, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -641,7 +644,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1419822508}
   - {fileID: 1045733908}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -856,6 +858,7 @@ GameObject:
   - component: {fileID: 1419822507}
   - component: {fileID: 1419822506}
   - component: {fileID: 1419822505}
+  - component: {fileID: 1419822509}
   m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -979,8 +982,24 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1394300463}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1419822509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419822504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524045326f9760f4f86d9494f0589f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1394300463}
+  targetOffset: {x: 0, y: 0, z: 0}
+  smoothTime: 0.5
+  maxSpeed: 15
 --- !u!1 &1459515562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,7 +1256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1764497645
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1337,6 +1356,7 @@ SceneRoots:
   - {fileID: 1600062372}
   - {fileID: 739232048}
   - {fileID: 1459515563}
+  - {fileID: 1419822508}
   - {fileID: 848259210}
   - {fileID: 1394300463}
   - {fileID: 1404106889}

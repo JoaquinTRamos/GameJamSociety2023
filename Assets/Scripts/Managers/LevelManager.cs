@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Bounds mapBounds;
     WaveManager waveManager;
     [SerializeField] Wave currentWave;
-    int currentWaveIndex;
+    int currentWaveIndex = 1;
 
     [SerializeField] WaveStateCanvas nextWavePanel;
     [SerializeField] TMP_Text waveCountText;
