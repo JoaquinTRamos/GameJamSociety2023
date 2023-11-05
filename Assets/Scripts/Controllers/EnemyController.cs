@@ -7,7 +7,12 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
 {
     public EnemyData enemyData;
     private HealthController healthController;
-    public int id;
+    public int id;    public ParticleSystem fireParticles;
+    public ParticleSystem waterParticles;
+    public ParticleSystem windParticles;
+    public ParticleSystem earthParticles;
+    public ParticleSystem lightningParticles;
+
     public GunModel gunModel;
 
     public GunModel GetGun() => gunModel;
@@ -18,16 +23,18 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     {
         healthController = GetComponent<HealthController>();
         healthController.Initialize(enemyData.health);
-        healthController.OnDie += OnDie;
         healthController.OnChangeHealth += OnTakeDamage;
+        healthController.OnDie += OnDie;
+        // print(gunModel);
 
-        ChangeColorOnElement();
+
+        Instantiate(enemyData.skin,transform);
     }
     public void Highlight()
     {
         //print("Enemy Highlighted");
         //gameObject.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 1);
-        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        //gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         StartCoroutine(RemoveHighlightAfterSeconds(0.2f)); // highlight will be removed after 3 seconds
     }
 
@@ -35,7 +42,7 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     {
         yield return new WaitForSeconds(seconds);
         //gameObject.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 0);
-        gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        //gameObject.GetComponent<SpriteRenderer>().color = Color.green;
     }
 
     // Update is called once per frame
@@ -49,7 +56,7 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     }
 
 
-    void ChangeColorOnElement()
+    /* void ChangeColorOnElement()
     {
         if (enemyData.elementType == Element.Fire)
             gameObject.GetComponent<SpriteRenderer>().color = Color.red;
@@ -63,26 +70,76 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
             gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         else
             print("No element assigned!");
-    }
+    } */
 
 
     public void Damage(int damage, Element element)
     {
         healthController.TakeDamage(damage);
+        Debug.Log(damage);
+         //if element is the same as my element, increase size
+        if (element == enemyData.elementType)
+        {
+            if (transform.localScale.x < 2)
+                transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+        }
 
         switch (element)
         {
             case Element.Fire:
+                Debug.Log("DANO FUEGO fshh"+transform.childCount);
+                
+                if(transform.childCount == 3){
+                    GameObject temp = Instantiate(fireParticles,transform).gameObject;
+                    temp.GetComponent<ParticleSystem>().Play();
+                    Destroy(temp, 5f);
+                    }
+                
+
+                
                 return;
             case Element.Water:
+                Debug.Log("DANO AGUA SPLASH");
+
+                if(transform.childCount == 3){
+                    GameObject temp = Instantiate(waterParticles,transform).gameObject;
+                    temp.GetComponent<ParticleSystem>().Play();
+                    Destroy(temp, 5f);
+                    }
+                
                 return;
             case Element.Wind:
+                Debug.Log("DANO AIRE WOOSH");
+                if(transform.childCount == 3){
+                    GameObject temp = Instantiate(windParticles,transform).gameObject;
+                    temp.GetComponent<ParticleSystem>().Play();
+                    Destroy(temp, 5f);
+                    }
+                
                 return;
             case Element.Lightning:
+                Debug.Log("DANO ELECTRICIDAD ZAP");
+                if(transform.childCount == 3){
+                    GameObject temp = Instantiate(lightningParticles,transform).gameObject;
+                                    temp.GetComponent<ParticleSystem>().Play();
+                    Destroy(temp, 5f);
+                    }
+
                 return;
             case Element.Earth:
+                Debug.Log("DANO TIERRA CRACK");
+                if(transform.childCount == 3){
+                    GameObject temp = Instantiate(earthParticles,transform).gameObject;
+                    temp.GetComponent<ParticleSystem>().Play();
+                    Destroy(temp, 5f);
+                    }
+                
                 return;
         }
+
+       
+        
+        
     }
 
     public void OnDie()
@@ -108,4 +165,6 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
         position.x = -((lossyTotal.x - lossyRemaining.x) / 2f);
         remainingHealthBar.localPosition = position;
     }
+
+
 }

@@ -19,6 +19,17 @@ namespace Guns.ElementAttacks
 
         public override void OnImpact(BulletModel p_model, Collider2D p_collision)
         {
+            /* //Check if it has a parent
+            if (p_collision.transform.parent == null) return;
+            if (p_collision.transform.parent.GetComponent<Collider2D>() == null) return;
+
+            p_collision = p_collision.transform.parent.GetComponent<Collider2D>(); */
+
+            if(p_collision.tag == "Hitbox"){
+                p_collision = p_collision.transform.parent.GetComponent<Collider2D>();
+                p_collision.GetComponent<EnemyController>().Damage(p_model.GetStats().Damage, Element.Fire);}
+            //Destroy(p_model);
+            Debug.Log("COLISION");
             var rnd = Random.Range(2, 11);
             for (int i = 0; i < rnd; i++)
             {
@@ -26,7 +37,7 @@ namespace Guns.ElementAttacks
                 var rndVector = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
                 bullet.Initialize(rndVector.normalized, p_model.GetStats().Damage, p_model.GetStats().Speed, p_model.GetStats().TargetsLayerMask);
             }
-            
+
             Destroy(p_model);
         }
     }

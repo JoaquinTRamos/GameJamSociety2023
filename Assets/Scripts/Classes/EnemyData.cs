@@ -10,4 +10,5 @@ public class EnemyData : ScriptableObject
     public float attackMod;
     public float speedMod;
     public Element elementType;
+    public GameObject skin;
 }

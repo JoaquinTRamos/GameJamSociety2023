@@ -54,12 +54,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Triggered");
         if (other.gameObject.layer != 11)
             return;
 
-        GameObject parentObject = other.transform.parent.gameObject;
-        EnemyController enemy = parentObject.GetComponent<EnemyController>();
-        if (enemy != null)
+        //GameObject parentObject = other.transform.parent.gameObject;
+        if (other.TryGetComponent<EnemyController>(out var enemy))
         {
             EnemiesInRange.Add(enemy);
         }
@@ -70,9 +70,8 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.layer != 11)
             return;
 
-        GameObject parentObject = other.transform.parent.gameObject;
-        EnemyController enemy = parentObject.GetComponent<EnemyController>();
-        if (enemy != null)
+        //GameObject parentObject = other.transform.parent.gameObject;
+        if (other.TryGetComponent<EnemyController>(out var enemy))
         {
             EnemiesInRange.Remove(enemy);
         }

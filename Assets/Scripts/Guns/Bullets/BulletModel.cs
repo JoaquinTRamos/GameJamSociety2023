@@ -34,8 +34,10 @@ namespace Guns.Bullets
             myElementAttack.InitAttack(this);
             m_initialized = true;
             Destroy(gameObject, lifeTime);
+
         }
 
+    
 
         private void Update()
         {
@@ -54,7 +56,6 @@ namespace Guns.Bullets
         {
             if (collision.gameObject.layer != 11)
                 return;
-
             myElementAttack.OnImpact(this, collision);
         }
     }
