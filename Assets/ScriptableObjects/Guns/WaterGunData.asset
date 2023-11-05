@@ -18,3 +18,4 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 2048
+  gunSkin: {fileID: 564660651871660406, guid: 7e657be82e059cd4fab722425109b320, type: 3}

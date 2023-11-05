@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Guns;
+using UnityEditor.XR;
 using UnityEngine;
 
 
@@ -11,6 +12,8 @@ public class PlayerController : MonoBehaviour
     float horMove, verMove;
     [SerializeField] float speedMod;
     private GunModel currGun;
+    bool isThrowing = false;
+    private Coroutine throwCoroutine;
     EnemyController closestEnemy = null;
 
     [SerializeField] private float detectionRadius = 3f;
@@ -27,7 +30,13 @@ public class PlayerController : MonoBehaviour
     {
         if (currGun != null)
             Destroy(currGun.gameObject);
-        currGun = Instantiate(enemy.GetGun(), transform);
+        GunModel gun = enemy.GetGun();
+        currGun = Instantiate(gun, transform);
+        Instantiate(gun.GetData().gunSkin, currGun.transform);
+        //move currgun a bit down and left to the player
+        currGun.transform.localPosition = new Vector2(0.5f, -0.5f);
+
+        //currGun.transform.localPosition = new Vector2(0, -10);
         enemy.OnDie();
         //currGun.transform.SetParent(transform);
         //currGun.transform.position = new Vector2();
@@ -45,11 +54,19 @@ public class PlayerController : MonoBehaviour
         currGun.Shoot(dir);
     }
 
-    private void Throw()
+    /* private void Throw()
     {
         currGun.Throw();
-    }
+    } */
 
+    private IEnumerator Throwing()
+    {
+        while (isThrowing)
+        {
+            currGun.transform.RotateAround(transform.position, Vector3.forward, 360 * Time.deltaTime);
+            yield return null;
+        }
+    }
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -122,9 +139,27 @@ public class PlayerController : MonoBehaviour
                 Shoot();
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButton(1))
         {
-            print("An attempt to throw has been made");
+            if (currGun != null)
+                if (Input.GetMouseButton(1) && !isThrowing)
+                {
+                    isThrowing = true;
+                    throwCoroutine = StartCoroutine(Throwing());
+                }
+
+            // If 1 key is released and the gun is being thrown, stop the throw
+            if (Input.GetMouseButton(1) && isThrowing)
+            {
+                isThrowing = false;
+                if (throwCoroutine != null)
+                {
+                    StopCoroutine(throwCoroutine);
+                    Debug.Log("done");
+                }
+            }
+            else
+                print("An attempt to throw has been made");
         }
 
     }

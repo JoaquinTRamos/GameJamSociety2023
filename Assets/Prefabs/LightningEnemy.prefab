@@ -208,7 +208,7 @@ MonoBehaviour:
   windParticles: {fileID: 6530800246334125821, guid: 8ed5755e835f4804aade9486e4cfd7b6, type: 3}
   earthParticles: {fileID: 6530800246334125821, guid: 270be1ec02a7fd74d8c2029f12a972df, type: 3}
   lightningParticles: {fileID: 6530800246334125821, guid: 65a51baadd941a34ea9575065e38e4fa, type: 3}
-  gunModel: {fileID: -429858645067007142, guid: 99c4848f8d6b8654cb910c24df6935cf, type: 3}
+  gunModel: {fileID: -429858645067007142, guid: cbef4da8cca6c6942af4d3613534a490, type: 3}
 --- !u!58 &8418363798577675255
 CircleCollider2D:
   m_ObjectHideFlags: 0

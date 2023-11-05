@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Guns
@@ -9,7 +11,10 @@ namespace Guns
         [SerializeField] private Transform shootPoint;
         [SerializeField] private GunData data;
         [SerializeField] private List<GunData> TEST_DATAS;
-
+private bool isThrowing = false;
+        public GunData GetData(){
+            return data;
+        }
         private void Update()
         {
             /* if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -44,7 +49,19 @@ namespace Guns
 
         public void Throw()
         {
-            throw new System.NotImplementedException();
+            if(Input.GetKeyDown(KeyCode.Mouse1)&&!isThrowing){
+                isThrowing = true;
+                StartCoroutine(Throwing());
+            }
+            else if(Input.GetKeyUp(KeyCode.Mouse1)&&isThrowing){
+                isThrowing = false;
+            }
+        }
+        private IEnumerator Throwing(){
+            while(isThrowing){
+                transform.Rotate(0,0,1);
+                yield return null;
+            }
         }
     }
 }
