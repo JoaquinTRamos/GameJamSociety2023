@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour, IDamageable
 {
     float horMove, verMove;
     [SerializeField] float speedMod;
+
+    [SerializeField] List<AudioClip> audioClips=new List<AudioClip>();
+    private AudioSource audioSrc;
     private GunModel currGun;
     bool isThrowing = false;
     private Coroutine throwCoroutine;
@@ -35,14 +38,17 @@ private float m_currHp;
         eatCurrentCooldown = 0;
         m_view = GetComponent<PlayerView>();
         StartCoroutine(CheckDistances());
+        audioSrc = GetComponent<AudioSource>();
     }
 
     private void TakeEnemy(EnemyController enemy)
     {
-
+        audioSrc.clip = audioClips[1];
+        audioSrc.Play();
 
         if (currGun != null)
             Destroy(currGun.gameObject);
+
 
         throwSpeed = 0f;
         GunModel gun = enemy.GetGun();
@@ -83,6 +89,7 @@ private float m_currHp;
 
     private IEnumerator Throwing()
     {
+        audioSrc.clip = audioClips[0];
         while (isThrowing)
         {
             if (currGun.transform.parent != null)
@@ -90,7 +97,12 @@ private float m_currHp;
                 currGun.transform.RotateAround(transform.position, Vector3.forward, (360 + throwSpeed * 20) * Time.deltaTime);
                 if (throwSpeed < 30f)
                     throwSpeed += throwAcceleration * Time.deltaTime;
+                
             }
+
+            if(audioSrc.isPlaying == false)
+                audioSrc.Play();
+
             yield return null;
         }
     }
