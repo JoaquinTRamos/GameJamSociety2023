@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Managers
 {
@@ -35,7 +36,7 @@ namespace Managers
 
         public void OnPlayerDeath()
         {
-            
+            SceneManager.LoadScene("GameOver");
         }
     }
 }
