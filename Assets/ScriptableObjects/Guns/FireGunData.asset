@@ -22,5 +22,7 @@ MonoBehaviour:
   fireRate: 0.1
   ammo: 100
   explosionRadius: 10
-  explosionDistance: 10
-  explosionArea: {fileID: 0}
+  explosionDamage: 30
+  explosionTimer: 2
+  particleExplosionSystem: {fileID: 6530800246334125821, guid: 8cdcf6095f8545344aed213f17d8be3b, type: 3}
+  elementType: 0

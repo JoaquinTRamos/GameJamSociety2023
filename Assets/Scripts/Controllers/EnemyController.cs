@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using Guns;
+using Managers;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour, IEnemy, IDamageable
 {
     public EnemyData enemyData;
+
+    Transform highlighteablePart;
+
     private HealthController healthController;
-    public int id; public ParticleSystem fireParticles;
+    public int id;
+    public ParticleSystem fireParticles;
     public ParticleSystem waterParticles;
     public ParticleSystem windParticles;
     public ParticleSystem earthParticles;
@@ -18,6 +23,8 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
 
 
     public GunModel gunModel;
+
+    GameObject skinInstance;
 
     public GunModel GetGun() => gunModel;
 
@@ -32,19 +39,44 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
         // print(gunModel);
 
         GameObject skin = enemyData.skin;
-        Instantiate(skin, transform);
+        skinInstance = Instantiate(skin, transform);
         skin.tag = "Enemy";
 
+        AssignHighlightablePart();
+
     }
+
+    void AssignHighlightablePart()
+    {
+        Element element = enemyData.elementType;
+
+        if (element == Element.Fire)
+            highlighteablePart = skinInstance.transform.GetChild(0);
+
+        if (element == Element.Water)
+            highlighteablePart = skinInstance.transform.GetChild(0).GetChild(0);
+
+        if (element == Element.Earth)
+            highlighteablePart = skinInstance.transform.GetChild(0).GetChild(0);
+
+        if (element == Element.Lightning)
+            highlighteablePart = skinInstance.transform.GetChild(0).GetChild(0);
+
+        if (element == Element.Wind)
+            highlighteablePart = skinInstance.transform.GetChild(0);
+    }
+
     public void Highlight()
     {
+        print("Enemy Highlighted");
+        highlighteablePart.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 1);
         StartCoroutine(RemoveHighlightAfterSeconds(0.2f)); // highlight will be removed after 3 seconds
     }
 
     IEnumerator RemoveHighlightAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-
+        highlighteablePart.GetComponent<SpriteRenderer>().material.SetInt("_HighlightBool", 0);
     }
 
     // Update is called once per frame
@@ -87,6 +119,11 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
                 if (transform.childCount == 3)
                 {
                     GameObject temp = Instantiate(fireParticles, transform).gameObject;
+                Debug.Log("DANO FUEGO fshh" + transform.childCount);
+
+                if (transform.childCount == 3)
+                {
+                    GameObject temp = Instantiate(fireParticles, transform).gameObject;
                     temp.GetComponent<ParticleSystem>().Play();
                     StartCoroutine(TakeDamageOverTime(5, 5f));
                     Destroy(temp, 5f);
@@ -108,9 +145,14 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
                 if (transform.childCount == 3)
                 {
                     GameObject temp = Instantiate(windParticles, transform).gameObject;
+                if (transform.childCount == 3)
+                {
+                    GameObject temp = Instantiate(windParticles, transform).gameObject;
                     temp.GetComponent<ParticleSystem>().Play();
                     StartCoroutine(PushBack(10f, 1f));
                     Destroy(temp, 5f);
+                }
+
                 }
 
                 return;
@@ -131,12 +173,20 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
                 if (transform.childCount == 3)
                 {
                     GameObject temp = Instantiate(earthParticles, transform).gameObject;
+                if (transform.childCount == 3)
+                {
+                    GameObject temp = Instantiate(earthParticles, transform).gameObject;
                     temp.GetComponent<ParticleSystem>().Play();
                     Destroy(temp, 5f);
                 }
 
+                }
+
                 return;
         }
+
+
+
 
 
 

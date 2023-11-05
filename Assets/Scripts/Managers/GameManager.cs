@@ -1,35 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace Managers
 {
-    // Start is called before the first frame update
-    public static GameManager instance;
-    public GameObject playerObject;
-    public EnemyManager enemyManager;
-    public LevelManager levelManager;
-
-    void Awake()
+    public class GameManager : MonoBehaviour
     {
-        // Chequea que sea la unica instancia del GameManager.
-        if (instance != null)
+        // Start is called before the first frame update
+        public static GameManager instance;
+        public GameObject playerObject;
+        public EnemyManager enemyManager;
+        public LevelManager levelManager;
+
+        void Awake()
         {
-            Destroy(instance);
+            // Chequea que sea la unica instancia del GameManager.
+            if (instance != null)
+            {
+                Destroy(instance);
+            }
+
+            instance = this;
+            DontDestroyOnLoad(this);
         }
 
-        instance = this;
-        DontDestroyOnLoad(this);
-    }
+        void Start()
+        {
 
-    void Start()
-    {
+        }
 
-    }
+        // Update is called once per frame
+        void Update()
+        {
 
-    // Update is called once per frame
-    void Update()
-    {
+        }
 
+        public void OnPlayerDeath()
+        {
+            
+        }
     }
 }
