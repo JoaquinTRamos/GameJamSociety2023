@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour, IDamageable
 {
     float horMove, verMove;
     [SerializeField] float speedMod;
+
+    private AudioSource audioSpin;
     private GunModel currGun;
     bool isThrowing = false;
     private Coroutine throwCoroutine;
@@ -35,6 +37,7 @@ private float m_currHp;
         eatCurrentCooldown = 0;
         m_view = GetComponent<PlayerView>();
         StartCoroutine(CheckDistances());
+        audioSpin = GetComponent<AudioSource>();
     }
 
     private void TakeEnemy(EnemyController enemy)
@@ -90,7 +93,12 @@ private float m_currHp;
                 currGun.transform.RotateAround(transform.position, Vector3.forward, (360 + throwSpeed * 20) * Time.deltaTime);
                 if (throwSpeed < 30f)
                     throwSpeed += throwAcceleration * Time.deltaTime;
+                
             }
+
+            if(audioSpin.isPlaying == false)
+                audioSpin.Play();
+
             yield return null;
         }
     }
