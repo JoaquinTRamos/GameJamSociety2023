@@ -194,4 +194,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myElementAttack: {fileID: 11400000, guid: ba1afa4b7c1daad4784e7f0f2b9ac2f1, type: 2}
-  lifeTime: 10
+  lifeTime: 3

@@ -11,6 +11,8 @@ namespace Guns
         public float speed;
         public LayerMask targetMask;
         public GameObject gunSkin;
+        public float fireRate;
+        public float ammo;
     }
 
 
