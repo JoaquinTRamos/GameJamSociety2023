@@ -10,6 +10,7 @@ namespace Guns
     {
         [SerializeField] private Transform shootPoint;
         [SerializeField] private GunData data;
+        private AudioSource audio;
 
 
         private bool m_isThrowing;
@@ -28,6 +29,9 @@ namespace Guns
             cooldown = 0;
             ammo = data.ammo;
             m_isThrowing = false;
+            audio = GetComponent<AudioSource>();
+
+            
         }
 
         public void Shoot(Vector2 p_dir)
@@ -42,6 +46,8 @@ namespace Guns
 
             cooldown = data.fireRate;
             ammo--;
+            
+            audio.Play();
 
             var bullet = Instantiate(data.bulletModel, shootPoint.position, Quaternion.identity);
             bullet.Initialize(p_dir, data.damage, data.speed, data.targetMask);
