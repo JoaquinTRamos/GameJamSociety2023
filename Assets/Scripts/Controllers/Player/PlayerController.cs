@@ -21,25 +21,29 @@ public class PlayerController : MonoBehaviour, IDamageable
     private float throwSpeed = 0f;
     public const float throwAcceleration = 2f; // The speed at which the throw speed increases
 
-    public const float cooldown = 0.5f;
-
-
     [SerializeField] private float detectionRadius = 3f;
     private PlayerView m_view;
     private List<EnemyController> EnemiesInRange = new List<EnemyController>();
-    private float m_currHp;
+
+    private float eatCurrentCooldown;
+    [SerializeField] private float eatMaxCooldown;
+private float m_currHp;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_currHp = maxHp;
+m_currHp = maxHp;
+eatCurrentCooldown = 0;
         StartCoroutine(CheckDistances());
     }
 
     private void TakeEnemy(EnemyController enemy)
     {
+
+
         if (currGun != null)
             Destroy(currGun.gameObject);
+
         throwSpeed = 0f;
         GunModel gun = enemy.GetGun();
         currGun = Instantiate(gun, transform);
@@ -81,8 +85,9 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         while (isThrowing)
         {
-            if (currGun.transform.parent != null){
-                currGun.transform.RotateAround(transform.position, Vector3.forward, (360+throwSpeed*20) * Time.deltaTime);
+            if (currGun.transform.parent != null)
+            {
+                currGun.transform.RotateAround(transform.position, Vector3.forward, (360 + throwSpeed * 20) * Time.deltaTime);
                 if (throwSpeed < 30f)
                     throwSpeed += throwAcceleration * Time.deltaTime;
             }
@@ -147,15 +152,21 @@ public class PlayerController : MonoBehaviour, IDamageable
         horMove = Input.GetAxisRaw("Horizontal");
         verMove = Input.GetAxisRaw("Vertical");
         //print(horMove + " " + verMove);
+        eatCurrentCooldown -= Time.deltaTime;
+
         if (Input.GetKeyDown(KeyCode.F) && closestEnemy != null)
         {
-            // print(closestEnemy.name);
-            TakeEnemy(closestEnemy);
+            if (eatCurrentCooldown <= 0)
+            {
+                eatCurrentCooldown = eatMaxCooldown;
+                TakeEnemy(closestEnemy);
+            }
         }
+
         if (inBoundingBox())
             transform.Translate(new Vector3(horMove, verMove, 0) * (speedMod * Time.deltaTime)); // De alguna manera hacer que rebote el pibe
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) || Input.GetMouseButtonDown(0))
         {
             if (currGun != null)
                 Shoot();
@@ -178,7 +189,7 @@ public class PlayerController : MonoBehaviour, IDamageable
                 StopCoroutine(throwCoroutine);
 
                 Throw();
-                
+
             }
         }
 
