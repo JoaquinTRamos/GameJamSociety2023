@@ -16,4 +16,4 @@ MonoBehaviour:
   attackMod: 2
   speedMod: 2
   elementType: 3
-  skin: {fileID: 4533046827902932077, guid: 96944988f695d4c47af0515556018ce3, type: 3}
+  skin: {fileID: 4533046827902932077, guid: afbebe823b3ec8c4084a94068f3332ac, type: 3}

@@ -10,7 +10,6 @@ namespace Guns
     {
         [SerializeField] private Transform shootPoint;
         [SerializeField] private GunData data;
-        [SerializeField] private List<GunData> TEST_DATAS;
 
 
         private bool m_isThrowing;
