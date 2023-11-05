@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     public static GameManager instance;
     public GameObject playerObject;
-
-    public List<MonoBehaviour> managers = new List<MonoBehaviour>(); // Fijarse en poner un interface de managers para el futuro.
+    public EnemyManager enemyManager;
+    public LevelManager levelManager;
 
     void Awake()
     {

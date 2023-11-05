@@ -15,4 +15,4 @@ MonoBehaviour:
   health: 10
   attackMod: 2
   speedMod: 4
-  elementType: 4
+  elementType: 0

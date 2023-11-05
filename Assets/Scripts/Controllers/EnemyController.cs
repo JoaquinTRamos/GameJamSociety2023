@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using Guns;
 using UnityEngine;
 
-
-
-
 public class EnemyController : MonoBehaviour, IEnemy, IDamageable
 {
     public EnemyData enemyData;

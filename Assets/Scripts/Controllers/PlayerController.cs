@@ -13,10 +13,6 @@ public class PlayerController : MonoBehaviour
     private GunModel currGun;
     EnemyController closestEnemy = null;
 
-    [SerializeField] Transform map;
-
-    Bounds mapBounds;
-
     [SerializeField] private float detectionRadius = 3f;
     private List<EnemyController> EnemiesInRange = new List<EnemyController>();
 
@@ -24,11 +20,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mapBounds.center = map.position;
-        mapBounds.extents = map.localScale / 2;
-        // print(mapBounds.size);
         StartCoroutine(CheckDistances());
-
     }
 
     private void TakeEnemy(EnemyController enemy)
@@ -140,7 +132,7 @@ public class PlayerController : MonoBehaviour
 
     bool inBoundingBox()
     {
-        if (mapBounds.Contains(transform.position))
+        if (GameManager.instance.levelManager.mapBounds.Contains(transform.position))
             return true;
 
         return false;

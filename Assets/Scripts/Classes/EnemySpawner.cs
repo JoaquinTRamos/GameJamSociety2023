@@ -9,28 +9,23 @@ public class EnemySpawner : MonoBehaviour
 {
     [Header("Bounding Plane - Takes First 2 elements of list")]
     [SerializeField] List<float> circleRadii = new List<float>();
-    [SerializeField] float angle, dist;
     [SerializeField] float cooldown;
-    float temp;
+    float temp, angle, dist;
 
-    [SerializeField] Transform player, spawnLooker, map;
-    Bounds mapBounds;
-    [SerializeField] GameObject enemyGO;
-    List<GameObject> listaEnemigos = new List<GameObject>();
+    [SerializeField] Transform player, spawnLooker;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         temp = cooldown;
-
-        mapBounds.center = map.position;
-        mapBounds.extents = map.localScale / 2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        listaEnemigos.Add(CheckSpawnEnemy());
+        GameManager.instance.enemyManager.listaEnemigos.Add(CheckSpawnEnemy());
     }
 
     GameObject CheckSpawnEnemy()
@@ -44,11 +39,11 @@ public class EnemySpawner : MonoBehaviour
 
             cooldown = temp;
 
-            Vector3 spawnPoint = (player.position + spawnLooker.up * dist);
+            Vector3 spawnPoint = player.position + spawnLooker.up * dist;
 
-            if (mapBounds.Contains(spawnPoint))
+            if (GameManager.instance.levelManager.mapBounds.Contains(spawnPoint))
             {
-                GameObject enemy = Instantiate(enemyGO, transform);
+                GameObject enemy = Instantiate(GameManager.instance.enemyManager.GetEnemy(Element.Fire), transform);
                 enemy.transform.position = spawnPoint;
                 return enemy;
             }
@@ -71,7 +66,7 @@ public class EnemySpawner : MonoBehaviour
 
         Gizmos.color = Color.blue;
 
-        Gizmos.DrawLine(player.position, (player.position + spawnLooker.up * dist));
+        Gizmos.DrawLine(player.position, player.position + spawnLooker.up * dist);
 
     }
 }
