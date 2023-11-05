@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Guns;
-using Managers;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour, IEnemy, IDamageable
@@ -119,11 +118,6 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
                 if (transform.childCount == 3)
                 {
                     GameObject temp = Instantiate(fireParticles, transform).gameObject;
-                Debug.Log("DANO FUEGO fshh" + transform.childCount);
-
-                if (transform.childCount == 3)
-                {
-                    GameObject temp = Instantiate(fireParticles, transform).gameObject;
                     temp.GetComponent<ParticleSystem>().Play();
                     StartCoroutine(TakeDamageOverTime(5, 5f));
                     Destroy(temp, 5f);
@@ -145,15 +139,12 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
                 if (transform.childCount == 3)
                 {
                     GameObject temp = Instantiate(windParticles, transform).gameObject;
-                if (transform.childCount == 3)
-                {
-                    GameObject temp = Instantiate(windParticles, transform).gameObject;
                     temp.GetComponent<ParticleSystem>().Play();
                     StartCoroutine(PushBack(10f, 1f));
                     Destroy(temp, 5f);
                 }
 
-                }
+                
 
                 return;
             case Element.Lightning:
@@ -173,14 +164,11 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
                 if (transform.childCount == 3)
                 {
                     GameObject temp = Instantiate(earthParticles, transform).gameObject;
-                if (transform.childCount == 3)
-                {
-                    GameObject temp = Instantiate(earthParticles, transform).gameObject;
                     temp.GetComponent<ParticleSystem>().Play();
                     Destroy(temp, 5f);
                 }
 
-                }
+                
 
                 return;
         }
