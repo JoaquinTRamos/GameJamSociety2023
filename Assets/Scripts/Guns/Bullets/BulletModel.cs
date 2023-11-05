@@ -14,7 +14,7 @@ namespace Guns.Bullets
             public float Speed;
             public LayerMask TargetsLayerMask;
         }
-        
+
 
         [SerializeField] private ElementAttack myElementAttack;
         [SerializeField] private float lifeTime = 10f;
@@ -31,20 +31,18 @@ namespace Guns.Bullets
             m_stats.Speed = p_speed;
             m_stats.TargetsLayerMask = p_targetMask;
 
-            
-            
             myElementAttack.InitAttack(this);
             m_initialized = true;
             Destroy(gameObject, lifeTime);
 
         }
-        
-        
+
+
         private void Update()
         {
-            if(!m_initialized)
+            if (!m_initialized)
                 return;
-            
+
             myElementAttack.ExecuteAttack(this);
         }
 
@@ -52,25 +50,13 @@ namespace Guns.Bullets
         {
             transform.position += p_dir * (p_speed * Time.deltaTime);
         }
-        
 
-        private void OnCollisionStay2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log("COLISION");
-            if(!collision.gameObject.CompareTag("Enemy"))
+            if (collision.gameObject.layer != 11)
                 return;
-            
-            
-            //myElementAttack.OnImpact(this, collision);
-        }
 
-
-        private void OnTriggerEnter2D(Collider2D col)
-        {
-           
-            Debug.Log("COLISION");
-            
-            myElementAttack.OnImpact(this, col);
+            myElementAttack.OnImpact(this, collision);
         }
     }
 }

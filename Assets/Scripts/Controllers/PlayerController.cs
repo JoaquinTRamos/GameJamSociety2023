@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         mapBounds.center = map.position;
         mapBounds.extents = map.localScale / 2;
-        print(mapBounds.size);
+        // print(mapBounds.size);
         StartCoroutine(CheckDistances());
 
     }
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         //currGun.transform.SetParent(transform);
         //currGun.transform.position = new Vector2();
 
-        print(currGun);
+        // print(currGun);
     }
 
     //public void SetGun(GunModel gun) => currGun = gun;
@@ -62,6 +62,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.layer != 11)
+            return;
+
         GameObject parentObject = other.transform.parent.gameObject;
         EnemyController enemy = parentObject.GetComponent<EnemyController>();
         if (enemy != null)
@@ -72,6 +75,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (other.gameObject.layer != 11)
+            return;
+
         GameObject parentObject = other.transform.parent.gameObject;
         EnemyController enemy = parentObject.GetComponent<EnemyController>();
         if (enemy != null)
@@ -113,15 +119,14 @@ public class PlayerController : MonoBehaviour
         //print(horMove + " " + verMove);
         if (Input.GetKeyDown(KeyCode.F) && closestEnemy != null)
         {
-            print(closestEnemy.name);
+            // print(closestEnemy.name);
             TakeEnemy(closestEnemy);
         }
         if (inBoundingBox())
             transform.Translate(new Vector3(horMove, verMove, 0) * speedMod * Time.deltaTime); // De alguna manera hacer que rebote el pibe
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            print("An attempt to shoot has been made");
             if (currGun != null)
                 Shoot();
         }
@@ -141,4 +146,3 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 }
-
