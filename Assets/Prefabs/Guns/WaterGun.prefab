@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 7662531229161038471}
-  data: {fileID: 11400000, guid: 67d58fee95a661f41b453da0a4ab9c9f, type: 2}
+  data: {fileID: 11400000, guid: 8d1e50fd96d0b3b429b24a4823cb6941, type: 2}
   TEST_DATAS: []
   ammo: 0
 --- !u!50 &-398400906708714526

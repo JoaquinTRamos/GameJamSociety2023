@@ -11,6 +11,9 @@ namespace Guns
         [SerializeField] private Transform shootPoint;
         [SerializeField] private GunData data;
         [SerializeField] private List<GunData> TEST_DATAS;
+
+
+        private bool m_isThrowing;
         public GunData GetData(){
             return data;
         }
@@ -25,6 +28,7 @@ namespace Guns
         {
             cooldown = 0;
             ammo = data.ammo;
+            m_isThrowing = false;
         }
 
         public void Shoot(Vector2 p_dir)
@@ -46,10 +50,50 @@ namespace Guns
 
         public void Throw()
         {
-            //This function is only called after it was thrown, so it just handles the explosion after the fact
+            Debug.Log("Lanzao");
+            m_isThrowing = true;
+            var x = StartCoroutine(TimerForExplosion());
             
-            //TODO add VFX
         }
-        
+
+        private IEnumerator TimerForExplosion()
+        {
+            yield return new WaitForSeconds(data.explosionTimer);
+            Explosion();
+            yield break;
+        }
+
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            if(!m_isThrowing)
+                return;
+            
+            
+        }
+
+        private void Explosion()
+        {
+            Debug.Log("EPLOTA");
+            var particle = Instantiate(data.particleExplosionSystem);
+            particle.transform.position = transform.position;
+            particle.Play();
+            RaycastHit2D[] hits = new RaycastHit2D[100];
+            var count = Physics2D.CircleCastNonAlloc(transform.position.normalized, data.explosionRadius, 
+                Vector2.zero, hits);
+
+
+            for (int i = 0; i < count; i++)
+            {
+                if (!hits[i].collider.gameObject.TryGetComponent(out IDamageable damageable))
+                    continue;
+                
+                if(damageable == this)
+                    continue;
+                
+                damageable.Damage(data.explosionDamage, data.elementType);
+            }
+            Debug.Log("Desaparece");
+            Destroy(gameObject);
+        }
     }
 }

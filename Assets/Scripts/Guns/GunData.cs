@@ -14,9 +14,10 @@ namespace Guns
         public float fireRate;
         public float ammo;
         public float explosionRadius;
-        public float explosionDistance;
-
-        public GameObject explosionArea;
+        public int explosionDamage;
+        public float explosionTimer;
+        public ParticleSystem particleExplosionSystem;
+        public Element elementType;
     }
 
 
