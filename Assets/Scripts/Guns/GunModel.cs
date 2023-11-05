@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Guns
@@ -9,42 +11,45 @@ namespace Guns
         [SerializeField] private Transform shootPoint;
         [SerializeField] private GunData data;
         [SerializeField] private List<GunData> TEST_DATAS;
+        public GunData GetData(){
+            return data;
+        }
+        
 
-        private void Update()
+        float cooldown;
+
+        
+        [SerializeField] private float ammo;
+
+        private void Start()
         {
-            /* if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                data = TEST_DATAS[0];
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                data = TEST_DATAS[1];
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                data = TEST_DATAS[2];
-            }
-
-            
-            
-            
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                Shoot(Vector2.right);
-            } */
+            cooldown = 0;
+            ammo = data.ammo;
         }
 
         public void Shoot(Vector2 p_dir)
         {
-            var bull = Instantiate(data.bulletModel, shootPoint.position, Quaternion.identity);
-            bull.Initialize(p_dir, data.damage, data.speed, data.targetMask);
+            if (ammo == 0) return;
+
+            if (cooldown >= 0)
+            {
+                cooldown -= Time.deltaTime;
+                return;
+            }
+
+            cooldown = data.fireRate;
+            ammo--;
+
+            var bullet = Instantiate(data.bulletModel, shootPoint.position, Quaternion.identity);
+            bullet.Initialize(p_dir, data.damage, data.speed, data.targetMask);
         }
 
         public void Throw()
         {
-            throw new System.NotImplementedException();
+            //This function is only called after it was thrown, so it just handles the explosion after the fact
+            
+            //TODO add VFX
         }
+        
     }
 }

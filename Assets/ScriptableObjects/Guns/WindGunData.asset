@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: WindGunData
   m_EditorClassIdentifier: 
   bulletModel: {fileID: 6118098588556143342, guid: 7c16a9f226c256947b5644ef8f077130, type: 3}
-  damage: 10
+  damage: 50
   speed: 10
   targetMask:
     serializedVersion: 2
     m_Bits: 2048
+  gunSkin: {fileID: 3043329476595022016, guid: e4baef5eca788a14aa41d0dd1e9aa338, type: 3}
+  fireRate: 0.5
+  ammo: 25

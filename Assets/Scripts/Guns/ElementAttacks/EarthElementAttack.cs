@@ -30,15 +30,18 @@ namespace Guns.ElementAttacks
                 p_collision.GetComponent<EnemyController>().Damage(p_model.GetStats().Damage, Element.Fire);}
             //Destroy(p_model);
             Debug.Log("COLISION");
+            Destroy(p_model.gameObject);
             var rnd = Random.Range(2, 11);
             for (int i = 0; i < rnd; i++)
             {
+                //TODO add VFX
+                //TODO Agregar minirocas al daño
                 var bullet = Instantiate(tinyRock, p_model.transform.position, p_model.transform.rotation);
                 var rndVector = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
                 bullet.Initialize(rndVector.normalized, p_model.GetStats().Damage, p_model.GetStats().Speed, p_model.GetStats().TargetsLayerMask);
             }
 
-            Destroy(p_model);
+            
         }
     }
 }

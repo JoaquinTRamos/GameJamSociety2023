@@ -27,8 +27,10 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
         healthController.OnDie += OnDie;
         // print(gunModel);
 
+        GameObject skin =enemyData.skin;
+        Instantiate(skin,transform);
+        skin.tag="Enemy";
 
-        Instantiate(enemyData.skin,transform);
     }
     public void Highlight()
     {
@@ -79,9 +81,13 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
         Debug.Log(damage);
          //if element is the same as my element, increase size
         if (element == enemyData.elementType)
-        {
-            if (transform.localScale.x < 2)
-                transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+        {   
+
+            GameObject skin = transform.GetChild(2).gameObject;
+            
+            Debug.Log(skin.name);
+            if (skin.transform.localScale.x < 2)
+                skin.transform.localScale += new Vector3(0.05f, 0.05f, 0.05f);
         }
 
         switch (element)
