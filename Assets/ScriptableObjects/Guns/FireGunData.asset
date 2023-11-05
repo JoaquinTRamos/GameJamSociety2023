@@ -18,6 +18,9 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 2048
+  gunSkin: {fileID: 7464608448650086265, guid: 9f38cf9e63e10334a940839f33aaecc1, type: 3}
   fireRate: 0.1
   ammo: 100
-  gunSkin: {fileID: 7464608448650086265, guid: 9f38cf9e63e10334a940839f33aaecc1, type: 3}
+  explosionRadius: 10
+  explosionDistance: 10
+  explosionArea: {fileID: 0}

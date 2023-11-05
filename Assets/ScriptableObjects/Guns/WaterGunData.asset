@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WaterGunData
   m_EditorClassIdentifier: 
   bulletModel: {fileID: 6118098588556143342, guid: 6b36fa0773f39ec4bb3f4ace927f40c5, type: 3}
-  damage: 50
+  damage: 30
   speed: 10
   targetMask:
     serializedVersion: 2
@@ -21,3 +21,6 @@ MonoBehaviour:
   gunSkin: {fileID: 564660651871660406, guid: 7e657be82e059cd4fab722425109b320, type: 3}
   fireRate: 0.5
   ammo: 25
+  explosionRadius: 0
+  explosionDistance: 0
+  explosionArea: {fileID: 0}

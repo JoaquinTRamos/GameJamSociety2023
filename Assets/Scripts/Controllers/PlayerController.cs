@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Guns;
+using Unity.VisualScripting;
 using UnityEditor.XR;
 using UnityEngine;
 
@@ -67,7 +68,9 @@ public class PlayerController : MonoBehaviour
         GunModel newGun = currGun;
         Instantiate(newGun.GetData());
         currGun = null;
-        Rigidbody2D rb = newGun.GetComponent<Rigidbody2D>();
+        
+        Rigidbody2D rb = newGun.AddComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
         rb.velocity = newGun.transform.up * throwSpeed;
 
     }

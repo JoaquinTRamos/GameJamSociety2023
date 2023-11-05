@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dee7770eebdab5d46af5a2d1af085028, type: 3}
-  m_Name: GenericLightningEnemy
+  m_Script: {fileID: 11500000, guid: 4c09b8d33897d1e4da9ce05bf97d51c1, type: 3}
+  m_Name: ElectricElementAttack
   m_EditorClassIdentifier: 
-  health: 20
-  attackMod: 2
-  speedMod: 2
-  elementType: 3
-  skin: {fileID: 4533046827902932077, guid: 38d1b8d56cd9d64438e48e07a5870cab, type: 3}
