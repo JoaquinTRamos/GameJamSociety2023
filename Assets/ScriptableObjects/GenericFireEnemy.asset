@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee7770eebdab5d46af5a2d1af085028, type: 3}
   m_Name: GenericFireEnemy
   m_EditorClassIdentifier: 
-  health: 10
+  health: 100
   attackMod: 2
   speedMod: 4
   elementType: 0

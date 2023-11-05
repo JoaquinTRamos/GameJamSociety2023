@@ -16,9 +16,10 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     // Start is called before the first frame update
     void Start()
     {
-        /* healthController = GetComponent<HealthController>();
-        healthController.Initialize(enemyData.health); */
-        // print(gunModel);
+        healthController = GetComponent<HealthController>();
+        healthController.Initialize(enemyData.health);
+        healthController.OnDie += OnDie;
+        healthController.OnChangeHealth += OnTakeDamage;
 
         ChangeColorOnElement();
     }
@@ -65,7 +66,7 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     }
 
 
-    public void Damage(int damage, Element element, System.Numerics.Vector3 direction)
+    public void Damage(int damage, Element element)
     {
         healthController.TakeDamage(damage);
 
@@ -82,5 +83,28 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
             case Element.Earth:
                 return;
         }
+    }
+
+    private void OnDie()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnTakeDamage(int max, int current)
+    {
+        Transform totalHealthBar = transform.GetChild(1);
+        Transform remainingHealthBar = totalHealthBar.GetChild(0);
+
+        Vector3 scale = remainingHealthBar.localScale;
+        Vector3 position = remainingHealthBar.localPosition;
+
+        scale.x = (float)current / (float)max;
+        remainingHealthBar.localScale = scale;
+
+        Vector3 lossyRemaining = remainingHealthBar.lossyScale;
+        Vector3 lossyTotal = totalHealthBar.lossyScale;
+
+        position.x = -((lossyTotal.x - lossyRemaining.x) / 2f);
+        remainingHealthBar.localPosition = position;
     }
 }

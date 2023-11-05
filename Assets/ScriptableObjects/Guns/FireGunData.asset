@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireGunData
   m_EditorClassIdentifier: 
   bulletModel: {fileID: 2626899881137438951, guid: 0f8ccbaf722c50648ba112753f329dcc, type: 3}
-  damage: 0.2
+  damage: 1
   speed: 10
   targetMask:
     serializedVersion: 2
