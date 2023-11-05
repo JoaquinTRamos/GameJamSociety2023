@@ -25,7 +25,6 @@ public class EnemySpawner : MonoBehaviour
 
         mapBounds.center = map.position;
         mapBounds.extents = map.localScale / 2;
-        print(mapBounds.size);
     }
 
     // Update is called once per frame
@@ -49,15 +48,11 @@ public class EnemySpawner : MonoBehaviour
 
             if (mapBounds.Contains(spawnPoint))
             {
-                print("This point is within the map bounds  Vector3:" + spawnPoint);
                 GameObject enemy = Instantiate(enemyGO, transform);
                 enemy.transform.position = spawnPoint;
                 return enemy;
             }
-            else
-            {
-                print("This point is not within the map bounds Vector3:" + spawnPoint);
-            }
+
         }
         else
             cooldown -= Time.deltaTime;

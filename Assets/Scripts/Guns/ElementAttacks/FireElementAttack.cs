@@ -15,6 +15,7 @@ namespace Guns.ElementAttacks
             var vector = p_model.GetStats().Dir;
             vector.x += RndX;
             vector.y += RndY;
+
             m_randomVector3S[p_model] = vector;
         }
 
@@ -25,11 +26,14 @@ namespace Guns.ElementAttacks
 
         public override void OnImpact(BulletModel p_model, Collider2D p_collision)
         {
-            //if(p_collision.gameObject.GetComponent<IDamageable>())
-            
+            if (p_collision.gameObject.GetComponent<IDamageable>() != null)
+            {
+                Debug.Log("hice daño");
+            }
+
             //DoDamage
 
-            m_randomVector3S.Remove(p_model);
+            // m_randomVector3S.Remove(p_model);
         }
     }
 }

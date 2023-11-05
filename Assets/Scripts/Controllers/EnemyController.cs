@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
     {
         /* healthController = GetComponent<HealthController>();
         healthController.Initialize(enemyData.health); */
-        print(gunModel);
+        // print(gunModel);
 
         ChangeColorOnElement();
     }
@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour, IEnemy, IDamageable
         transform.Translate(movement);
     }
 
-    
+
     void ChangeColorOnElement()
     {
         if (enemyData.elementType == Element.Fire)
