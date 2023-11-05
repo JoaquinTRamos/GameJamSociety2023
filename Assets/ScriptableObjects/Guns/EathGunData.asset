@@ -18,3 +18,5 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 2048
+  fireRate: 1
+  ammo: 12

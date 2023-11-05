@@ -46,7 +46,13 @@ public class EnemySpawner : MonoBehaviour
 
             if (GameManager.instance.levelManager.mapBounds.Contains(spawnPoint) && GameManager.instance.enemyManager.canSpawn)
             {
-                GameObject enemy = Instantiate(GameManager.instance.enemyManager.GetEnemy(), transform);
+                GameObject original = GameManager.instance.enemyManager.GetEnemy();
+                if (original == null)
+                {
+                    return null;
+                }
+
+                GameObject enemy = Instantiate(original, transform);
                 enemy.transform.position = spawnPoint;
                 GameManager.instance.enemyManager.dictEnemiesVivos.Add(GameManager.instance.enemyManager.enemyCounter, enemy);
                 enemy.GetComponent<EnemyController>().id = GameManager.instance.enemyManager.enemyCounter;

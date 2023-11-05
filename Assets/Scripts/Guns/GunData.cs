@@ -10,6 +10,8 @@ namespace Guns
         public int damage;
         public float speed;
         public LayerMask targetMask;
+        public float fireRate;
+        public float ammo;
     }
 
 
