@@ -7,11 +7,11 @@ namespace Guns
     public class GunData : ScriptableObject
     {
         public BulletModel bulletModel;
-        public float damage;
+        public int damage;
         public float speed;
         public LayerMask targetMask;
     }
-    
-    
-    
+
+
+
 }

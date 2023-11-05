@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GunData
   m_EditorClassIdentifier: 
   bulletModel: {fileID: 0}
-  damage: 0.2
+  damage: 0
   speed: 0.5
   targetMask:
     serializedVersion: 2

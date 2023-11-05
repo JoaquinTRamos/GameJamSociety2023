@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Guns.Bullets;
 using UnityEngine;
 
@@ -26,14 +27,16 @@ namespace Guns.ElementAttacks
 
         public override void OnImpact(BulletModel p_model, Collider2D p_collision)
         {
-            if (p_collision.gameObject.GetComponent<IDamageable>() != null)
-            {
-                Debug.Log("hice daño");
-            }
+            Debug.Log("PreimpacPreimpact");
+            IDamageable target = p_collision.gameObject.GetComponent<IDamageable>();
+            if (target == null)
+                return;
 
-            //DoDamage
+            Debug.Log("IMpact");
 
-            // m_randomVector3S.Remove(p_model);
+            int damage = p_model.m_stats.Damage;
+            Debug.Log("Damage" + damage);
+            target.Damage(damage, Element.Fire);
         }
     }
 }
